@@ -1,0 +1,7 @@
+# Local Netlify folder
+.netlify
+*.*~lock~
+.DS_Store
+
+# Camera originals for tools/stages.py: kept out of the repo and the site (SPEC.md §6.3)
+images/models/
