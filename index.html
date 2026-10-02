@@ -1,0 +1,519 @@
+  <!DOCTYPE html>
+  <html lang="en-GB">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting Desk: Mini Tracker</title>
+    <meta name="description" content="Painting Desk is a miniature-painting tracker for iPhone and iPad: the kits on your desk, every pot you own, colour ramps and the recipes that worked.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#F3EEE4">
+    <link rel="canonical" href="https://paintingdesk.app/">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/images/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Painting Desk">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:url" content="https://paintingdesk.app/">
+    <meta property="og:title" content="Painting Desk: Mini Tracker">
+    <meta property="og:description" content="Painting Desk is a miniature-painting tracker for iPhone and iPad: the kits on your desk, every pot you own, colour ramps and the recipes that worked.">
+    <meta property="og:image" content="https://paintingdesk.app/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="The Painting Desk app icon beside a painted miniature on a black display plinth">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="/css/site.css">
+  </head>
+
+  <body class="font-sans bg-paper text-ink antialiased">
+    <span include-html="/includes/header.html"></span>
+
+
+    <main>
+  <!-- Hero: the app itself first, with pieces of what it does set around the phone, then the headline under it
+       (the "app spilling out" layout). Only the phone and the model's stages move; the cards hold still. -->
+  <section class="pt-10 md:pt-14 lg:pt-6 pb-16 md:pb-20 overflow-hidden">
+    <div class="hero-stage max-w-6xl mx-auto">
+      <!-- One model, Sprue to Done (images/stages, built by tools/stages.py). The finished photo is the page's own;
+           the other four load after it and js/illustrations.js plays them through once. -->
+    <figure class="stage-model">
+      <div class="on-plinth cursor-crosshair" data-eyedropper>
+        <img src="/images/stages/done.webp" width="720" height="1280" alt="A finished miniature, an armoured warrior with sword and pistol, standing on a black display plinth. Tap it to sample a colour." class="block w-full h-auto">
+        <img data-src="/images/stages/sprue.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Sprue">
+        <img data-src="/images/stages/built.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Built">
+        <img data-src="/images/stages/primed.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Primed">
+        <img data-src="/images/stages/in-progress.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="In Progress">
+        <span class="scrim-stamp left-3 top-3 pointer-events-none" data-stage-stamp>Done</span>
+        <!-- Says what a tap does; after one, it shows the colour taken and offers the way down to it. -->
+        <span class="scrim-stamp sample-hint left-3 bottom-3 pointer-events-none normal-case tracking-normal text-[0.75rem] font-medium" data-sample-hint>
+          <svg class="w-3.5 h-3.5 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5.5 4 4"/><path d="M17 3a2.1 2.1 0 0 1 3 3l-2.5 2.5-3-3Z"/><path d="M14.5 6.5 5 16v3h3l9.5-9.5"/></svg>
+          Tap to sample
+        </span>
+        <a href="#colour" class="scrim-stamp sample-hint left-3 bottom-3 normal-case tracking-normal text-[0.75rem] font-medium" data-sample-result hidden>
+          <span class="w-3.5 h-3.5 rounded-full self-center border border-[#F3EEE4]/70" data-sample-swatch></span>
+          <span>See its paints</span>
+          <svg class="w-3 h-3 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+        </a>
+      </div>
+      <figcaption class="stage-row pt-3" role="group" aria-label="See the model at each stage">
+        <button type="button" data-stage aria-pressed="false"><span class="sr-only">Sprue</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">Built</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">Primed</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">In Progress</span></button><button type="button" data-stage aria-pressed="true" class="is-current"><span class="sr-only">Done</span></button>
+      </figcaption>
+    </figure>
+
+    <div class="stage-phone" aria-label="Painting Desk on iPhone">
+      <div class="device">
+        <span class="device-button is-left" style="top:16%;height:4%"></span>
+        <span class="device-button is-left" style="top:23%;height:7%"></span>
+        <span class="device-button is-left" style="top:32%;height:7%"></span>
+        <span class="device-button is-right" style="top:25%;height:11%"></span>
+        <!-- The app's own screens, from its demo store (SPEC.md §5.2), shown in turn by js/illustrations.js. -->
+        <div class="device-screen">
+          <img src="/images/screens/desk.webp" width="420" height="913" alt="Painting Desk on iPhone: the Desk, the kits being painted now, each with its photo and days on the desk." data-phone-screen>
+          <img data-src="/images/screens/kit.webp" width="420" height="913" alt="" aria-hidden="true" class="phone-screen" data-phone-screen>
+          <img data-src="/images/screens/paints.webp" width="420" height="913" alt="" aria-hidden="true" class="phone-screen" data-phone-screen>
+          <img data-src="/images/screens/colour.webp" width="420" height="913" alt="" aria-hidden="true" class="phone-screen" data-phone-screen>
+          <img data-src="/images/screens/showcase.webp" width="420" height="913" alt="" aria-hidden="true" class="phone-screen" data-phone-screen>
+          <img data-src="/images/screens/shelf.webp" width="420" height="913" alt="" aria-hidden="true" class="phone-screen" data-phone-screen>
+        </div>
+      </div>
+    </div>
+
+      <!-- The rest of the app, as cards from its own screens. -->
+      <div class="stage-card is-desk card" aria-hidden="true">
+        <p class="font-serif text-[1.45em] leading-[1.05] mb-[0.3em]">Cavalry lancer</p>
+        <p class="flex items-baseline justify-between gap-[0.75em]"><span class="meta">In Progress</span><span class="meta whitespace-nowrap"><span class="font-serif text-[1.6em] leading-none normal-case tracking-normal text-accent">12</span> days</span></p>
+      </div>
+      <div class="stage-card is-ramp card" aria-hidden="true">
+        <p class="flex items-baseline justify-between mb-[0.75em]"><span class="font-serif text-[1.3em] leading-none">Orange Rust</span><span class="meta">Ramp</span></p>
+        <div class="flex gap-[0.35em]"><span class="flex-1"><span class="block h-[2.4em] rounded-[3px]" style="background:#A40E21"></span><span class="block mt-[0.4em] text-[0.62em] font-semibold tracking-[0.08em] uppercase text-muted text-center">S2</span></span><span class="flex-1"><span class="block h-[2.4em] rounded-[3px]" style="background:#B74223"></span><span class="block mt-[0.4em] text-[0.62em] font-semibold tracking-[0.08em] uppercase text-muted text-center">S1</span></span><span class="flex-1"><span class="block h-[2.4em] rounded-[3px]" style="background:#C76832"></span><span class="block mt-[0.4em] text-[0.62em] font-semibold tracking-[0.08em] uppercase text-muted text-center">Base</span></span><span class="flex-1"><span class="block h-[2.4em] rounded-[3px]" style="background:#D48B4D"></span><span class="block mt-[0.4em] text-[0.62em] font-semibold tracking-[0.08em] uppercase text-muted text-center">H1</span></span><span class="flex-1"><span class="block h-[2.4em] rounded-[3px]" style="background:#DEAD6F"></span><span class="block mt-[0.4em] text-[0.62em] font-semibold tracking-[0.08em] uppercase text-muted text-center">H2</span></span></div>
+        <p class="meta mt-[0.75em]">Five paints · all close</p>
+      </div>
+      <div class="stage-card is-clock card" aria-hidden="true">
+        <p class="meta meta-accent mb-[0.3em]">Painting</p>
+        <p class="font-serif text-[2.6em] leading-none tabular-nums" data-painting-clock="4410">1:13:30</p>
+        <p class="meta mt-[0.4em]">Cavalry lancer</p>
+      </div>
+      <div class="stage-card is-pot card" aria-hidden="true">
+        <div class="flex items-center gap-[0.75em]">
+          <svg class="pot w-[3.25em] h-[3.25em] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="hero-pot-level"><rect x="0" y="980" width="1400" height="420"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#hero-pot-level)" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
+          <div><p class="meta meta-accent mb-[0.2em]">Last pot</p><p class="text-[0.9em] text-muted leading-snug">Orange Rust · nothing sealed behind it</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 md:mt-14 lg:mt-8 text-center">
+      <p class="eyebrow eyebrow-accent mb-4">Mini painting tracker</p>
+      <div class="hero-title mx-auto mb-6">
+        <h1 class="text-balance font-serif text-[3.25rem] sm:text-6xl md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6rem] leading-[0.95] tracking-tight">Finish what's on the desk</h1>
+      </div>
+      <p class="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8">Painting Desk tracks every kit from sprue to done, every pot on your rack and every recipe that worked. What you finish goes on the Showcase.</p>
+      <div class="flex flex-wrap justify-center gap-3 mb-5">
+        <a href="https://apps.apple.com/app/idXXXXXXXXXX" class="btn-primary">Download on the App Store</a>
+        <a href="#desk" class="btn-secondary">See what it does</a>
+      </div>
+      <p class="meta">iPhone and iPad · Nothing to sign up for</p>
+    </div>
+  </section>
+
+  <!-- Store board 2: the Desk, and the shelf it draws from. The app's model (PLAN.md D19, D20): every kit is on
+       the desk or on the shelf; stages carry on in either; Done sends a kit back to the shelf and onto the Showcase. -->
+  <section id="desk" class="scroll-mt-20 border-t border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-end mb-12 md:mb-14">
+        <div>
+          <p class="eyebrow eyebrow-accent mb-4">The Shelf and the Desk</p>
+          <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1]">A shelf for the pile. A desk for the work.</h2>
+        </div>
+        <p class="text-lg text-muted max-w-md">Every model you own goes on the shelf: the backlog, the pile of shame, all of it, sorted by stage. The desk holds the few you're painting now. Finish one and it goes on the Showcase.</p>
+      </div>
+
+      <!-- Three equal panels: the three places matter as much as each other. -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 lg:gap-4 items-stretch">
+        <!-- The shelf: plain paper, because it is off the desk (DESIGN.md: no pegboard behind it). -->
+        <div class="card p-4 sm:p-5 min-w-0 flex flex-col">
+          <div class="flex items-baseline justify-between mb-1">
+            <p class="font-serif text-[1.75rem] leading-none">The Shelf</p>
+            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">46</span> kits</p>
+          </div>
+          <p class="text-sm text-muted mb-1">Everything not on the desk.</p>
+            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>Sprue</span><span class="font-serif text-base normal-case tracking-normal text-ink">30</span></p>
+            <ul>
+              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
+                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Cavalry regiment <span class="text-muted">×10</span></span><span class="meta block mt-1 truncate">Fantasy · Wargame</span></span>
+              </li>
+              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
+                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Ruined chapel</span><span class="meta block mt-1 truncate">Terrain</span></span>
+              </li>
+              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
+                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Ranger captain</span><span class="meta block mt-1 truncate">Fantasy · Skirmish</span></span>
+              </li>
+            </ul>
+            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>Built</span><span class="font-serif text-base normal-case tracking-normal text-ink">9</span></p>
+            <ul>
+              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
+                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Wolf riders <span class="text-muted">×5</span></span><span class="meta block mt-1 truncate">Fantasy · Wargame</span></span>
+              </li>
+            </ul>
+            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>In Progress</span><span class="font-serif text-base normal-case tracking-normal text-ink">2</span></p>
+            <ul>
+              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
+                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Knight on foot</span><span class="meta block mt-1 truncate">Historical · 54mm</span></span><span class="meta flex-none">Paused</span>
+              </li>
+            </ul>
+          <p class="meta text-faint pt-3 mt-auto">+ 41 more</p>
+        </div>
+      <div class="flex lg:flex-col items-center justify-center gap-2 py-1 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
+        <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+        <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Put on the desk</span>
+      </div>
+        <!-- The desk: on the pegboard, like the app's. -->
+        <div class="pegboard rounded-[6px] p-4 sm:p-5 min-w-0 flex flex-col">
+          <div class="flex items-baseline justify-between mb-1 px-1">
+            <p class="font-serif text-[1.75rem] leading-none">The Desk</p>
+            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">4</span> kits</p>
+          </div>
+          <p class="text-sm text-muted mb-4 px-1">What you're painting now.</p>
+          <ul class="space-y-2.5">
+            <li class="card p-3.5 flex items-start justify-between gap-3">
+              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Cavalry lancer</p><p class="meta truncate">In Progress</p></div>
+              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">12</span><span class="meta block mt-0.5">days</span></p>
+            </li>
+            <li class="card p-3.5 flex items-start justify-between gap-3">
+              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Dwarf rangers <span class="text-muted">×5</span></p><p class="meta truncate">Primed</p></div>
+              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">4</span><span class="meta block mt-0.5">days</span></p>
+            </li>
+            <li class="card p-3.5 flex items-start justify-between gap-3">
+              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Plague doctor bust</p><p class="meta truncate">Built</p></div>
+              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">32</span><span class="meta block mt-0.5">days</span></p>
+            </li>
+            <li class="card p-3.5 flex items-start justify-between gap-3">
+              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Watchtower</p><p class="meta truncate">Sprue</p></div>
+              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">1</span><span class="meta block mt-0.5">day</span></p>
+            </li>
+          </ul>
+          <p class="flex items-center gap-2 meta pt-4 mt-auto px-1">
+            <svg class="w-4 h-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>
+            Back to the shelf keeps its stage
+          </p>
+        </div>
+      <div class="flex lg:flex-col items-center justify-center gap-2 py-1 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
+        <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+        <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Done</span>
+      </div>
+        <!-- The Showcase: a finished kit's Done photo, square, as the app crops it. -->
+        <div class="card p-4 sm:p-5 min-w-0 flex flex-col">
+          <div class="flex items-baseline justify-between mb-1">
+            <p class="font-serif text-[1.75rem] leading-none">The Showcase</p>
+            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">44</span> this year</p>
+          </div>
+          <p class="text-sm text-muted mb-4">Finished, photographed, on a plinth.</p>
+          <div class="on-plinth aspect-square lg:aspect-auto lg:flex-1 lg:min-h-[16rem]">
+            <img src="/images/stages/done.webp" width="720" height="1280" loading="lazy" alt="The finished miniature from the top of the page, on its plinth" class="w-full h-full object-cover object-[50%_45%] lg:absolute lg:inset-0">
+          </div>
+          <p class="flex items-baseline justify-between gap-3 pt-3">
+            <span class="font-serif text-[1.2rem] leading-none">Veteran with sword</span>
+            <span class="meta">Done</span>
+          </p>
+        </div>
+      </div>
+
+      <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 mt-12 md:mt-14 pt-8 border-t border-rule">
+        <div><dt class="meta meta-accent mb-2">New kits</dt><dd class="text-sm text-muted">Start on the shelf, in Sprue. A name is all it takes; the rest can wait.</dd></div>
+        <div><dt class="meta meta-accent mb-2">An empty desk</dt><dd class="text-sm text-muted">Painting Desk offers three from the shelf: the two furthest along and one at random, the same all day.</dd></div>
+        <div><dt class="meta meta-accent mb-2">Desk size</dt><dd class="text-sm text-muted">Say how many kits the desk holds and the app notes when it's crowded. A note, never a block.</dd></div>
+        <div><dt class="meta meta-accent mb-2">Squads</dt><dd class="text-sm text-muted">A kit is one model or a whole squad painted together. Split it when a few get ahead of the rest.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Store board 3: Sprue to Done -->
+  <section class="border-t border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div class="md:order-2">
+        <p class="eyebrow eyebrow-accent mb-4">Sprue to Done</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Every stage, photographed</h2>
+        <p class="text-lg text-muted max-w-md">Move a kit to its next stage in two taps, and Painting Desk asks for a photo on the way. Every shot is stamped with its stage, so the whole story is there when the kit is done.</p>
+      </div>
+      <div class="md:order-1">
+        <fieldset class="mb-6 min-w-0">
+          <legend class="meta mb-3">Try it: the kit's stage</legend>
+          <div class="selector">
+            <input type="radio" name="stage" id="stage-sprue"><label for="stage-sprue">Sprue</label>
+            <input type="radio" name="stage" id="stage-built"><label for="stage-built">Built</label>
+            <input type="radio" name="stage" id="stage-primed" checked><label for="stage-primed">Primed</label>
+            <input type="radio" name="stage" id="stage-progress"><label for="stage-progress">In Progress</label>
+            <input type="radio" name="stage" id="stage-done"><label for="stage-done">Done</label>
+          </div>
+        </fieldset>
+        <div class="card p-6 sm:p-7">
+          <p class="font-serif text-[1.875rem] leading-[1.05] mb-2">Photo before you move on?</p>
+          <p class="text-sm text-muted mb-6">Moving to <span data-stage-name>Primed</span>. The shot is stamped <span data-stage-name>Primed</span> and keeps it, wherever the kit goes next.</p>
+          <div class="grid gap-2.5">
+            <span class="btn-primary w-full pointer-events-none">Take photo</span>
+            <span class="btn-secondary w-full pointer-events-none">Move without one</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store board 4: the Paint Rack, on the wall it stands against -->
+  <section class="pegboard border-y border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16 items-center">
+      <div>
+        <p class="eyebrow eyebrow-accent mb-4">4,700 paints · 10 brands</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Know every pot you own</h2>
+        <p class="text-lg text-muted max-w-md">Tick your paints off on the swatch grid, scan the pots with the camera or import a spreadsheet. Each pot shows how much is left, and Painting Desk tells you when you're on the last one.</p>
+      </div>
+      <div>
+        <div class="flex items-baseline justify-between mb-5">
+          <span class="meta">Ordered by colour</span>
+          <span class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">16</span> pots</span>
+        </div>
+        <!-- Each pot clips its paint to its level (DESIGN.md: full, or 0.3 of the frame when low). -->
+        <ul class="shelf grid-cols-4 md:grid-cols-8" data-fill-shelf aria-label="A shelf of sixteen paints from seven brands">
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-1"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-1)" fill="#000000"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Black</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-2"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-2)" fill="#2E2E2C"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">German Grey</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-3"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" clip-path="url(#fill-3)" fill="#253B6D"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Navy Blue</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-4"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" clip-path="url(#fill-4)" fill="#4F78A3"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Wolf Grey</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-5"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#ak-paint" fill="#EBE4D6"/><use href="/images/pots.svg#ak-paint" clip-path="url(#fill-5)" fill="#88C2CD"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Sky Blue</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-6"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-6)" fill="#475436"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Fern Green</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-7"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" clip-path="url(#fill-7)" fill="#CFD7AC"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Thrall Flesh</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-8"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" clip-path="url(#fill-8)" fill="#F7E52D"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Cygnus Yellow</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-9"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-9)" fill="#C69825"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Yellow Oxide</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-10"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" clip-path="url(#fill-10)" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Desert Yellow</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-11"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-11)" fill="#BEA374"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Bone White</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-12"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-12)" fill="#AF6816"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Leather Brown</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-13"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#pot-paint" fill="#EBE4D6"/><use href="/images/pots.svg#pot-paint" clip-path="url(#fill-13)" fill="#734834"/><use href="/images/pots.svg#pot-cap" fill="#2C2A29"/><use href="/images/pots.svg#pot-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Flat Earth</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-14"><rect data-fill x="0" y="980" width="1400" height="420"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-14)" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Orange Rust</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-15"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#ak-paint" fill="#EBE4D6"/><use href="/images/pots.svg#ak-paint" clip-path="url(#fill-15)" fill="#B83E26"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">Carmine</span></li>
+          <li class="shelf-cell"><svg class="pot" viewBox="0 0 1400 1400" aria-hidden="true"><clipPath id="fill-16"><rect data-fill x="0" y="0" width="1400" height="1400"/></clipPath><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" clip-path="url(#fill-16)" fill="#A82135"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="rail"></span><span class="shelf-name">The Red</span></li>
+        </ul>
+        <p class="mt-8 flex items-baseline gap-3 text-sm text-muted"><span class="meta meta-accent flex-none">Last pot</span> Orange Rust is low, with nothing sealed behind it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store board 5: Colour. A working copy of the app's colour page (js/colour-tool.js); the rows drawn
+       here are what it answers for Orange Rust, so the page reads the same before the script runs. -->
+  <section id="colour" class="scroll-mt-20 border-b border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
+      <div class="md:sticky md:top-28">
+        <p class="eyebrow eyebrow-accent mb-4">Ramps · Harmonies · Substitutes</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Build the perfect recipe</h2>
+        <p class="text-lg text-muted max-w-md mb-9">Pick a base colour and get shadows that cool and highlights that warm, not just a darker and lighter version. Every step is a real paint, with how close it is.</p>
+        <p class="meta mb-1">Try it: take a pot off the shelf</p>
+        <ul class="preset-shelf flex items-end justify-between" aria-label="Base colours">
+            <li><button type="button" class="preset" data-preset aria-pressed="true" aria-label="Orange Rust, Vallejo Model Air" title="Orange Rust · Vallejo" data-name="Orange Rust" data-brand="Vallejo" data-range="Model Air" data-hex="C76832" data-shape="generic" data-cap="FFFFFF"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg></button></li>
+            <li><button type="button" class="preset" data-preset aria-pressed="false" aria-label="Sky Blue, Scale75 Scale Color" title="Sky Blue · Scale75" data-name="Sky Blue" data-brand="Scale75" data-range="Scale Color" data-hex="2496C8" data-shape="s75" data-cap="2C2A29"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" fill="#2496C8"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg></button></li>
+            <li><button type="button" class="preset" data-preset aria-pressed="false" aria-label="Army Green, The Army Painter Warpaints Fanatic" title="Army Green · The Army Painter" data-name="Army Green" data-brand="The Army Painter" data-range="Warpaints Fanatic" data-hex="5D7554" data-shape="armypainter" data-cap="FFFFFF"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" fill="#5D7554"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg></button></li>
+            <li><button type="button" class="preset" data-preset aria-pressed="false" aria-label="Alien Purple, Vallejo Game Color" title="Alien Purple · Vallejo" data-name="Alien Purple" data-brand="Vallejo" data-range="Game Color" data-hex="7161A8" data-shape="generic" data-cap="2C2A29"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#7161A8"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg></button></li>
+            <li><button type="button" class="preset" data-preset aria-pressed="false" aria-label="Verdigris, Vallejo Game Color" title="Verdigris · Vallejo" data-name="Verdigris" data-brand="Vallejo" data-range="Game Color" data-hex="91CBCC" data-shape="generic" data-cap="2C2A29"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#91CBCC"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg></button></li>
+            <li><button type="button" class="preset" data-preset aria-pressed="false" aria-label="Barbarian Flesh, Vallejo Game Air" title="Barbarian Flesh · Vallejo" data-name="Barbarian Flesh" data-brand="Vallejo" data-range="Game Air" data-hex="A17C62" data-shape="generic" data-cap="2C2A29"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#A17C62"/><use href="/images/pots.svg#generic-cap" fill="#2C2A29"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg></button></li>
+        </ul>
+        <span class="rail block mb-6" aria-hidden="true"></span>
+        <div class="flex items-center gap-4 max-w-md">
+          <label class="any-colour">
+            <input type="color" value="#C76832" data-any-colour class="sr-only">
+            <span class="any-colour-well" aria-hidden="true"></span>
+          </label>
+          <p class="text-sm text-muted">Pick any colour, or tap the model at the top of the page: Painting Desk samples a small patch, not a single pixel, and ramps from that.</p>
+        </div>
+      </div>
+      <div class="card px-5 sm:px-6 pt-5 pb-3 min-w-0" data-colour-tool>
+        <div class="flex items-center gap-3 pb-4 mb-4 border-b border-ink" data-colour-base aria-live="polite">
+          <svg class="pot w-12 h-12 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
+          <div>
+            <p class="font-serif text-[1.6rem] leading-none mb-1">Orange Rust</p>
+            <p class="meta">Vallejo · Model Air</p>
+          </div>
+        </div>
+        <div class="flex gap-1.5 mb-4 overflow-x-auto pb-1" role="group" aria-label="What to answer">
+          <button type="button" class="chip" data-mode="ramp" aria-pressed="true">Ramp</button>
+          <button type="button" class="chip" data-mode="complementary" aria-pressed="false">Complementary</button>
+          <button type="button" class="chip" data-mode="split" aria-pressed="false">Split</button>
+          <button type="button" class="chip" data-mode="triad" aria-pressed="false">Triad</button>
+          <button type="button" class="chip" data-mode="analogous" aria-pressed="false">Analogous</button>
+        </div>
+        <label class="flex items-center gap-4 mb-2" data-hue-shift-row>
+          <span class="meta flex-none">Hue shift</span>
+          <input type="range" min="0" max="30" step="1" value="12" data-hue-shift class="flex-1 min-w-0">
+          <span class="font-serif text-xl leading-none w-9 text-right" data-hue-shift-value>12°</span>
+        </label>
+        <ol class="min-h-[22rem]" data-colour-rows aria-live="polite">
+          <li class="entity-row">
+            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#A40E21"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Shadow 2</span></span>
+            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" fill="#A8141F"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
+            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Pure Red</span><span class="meta block truncate mt-1">The Army Painter · Warpaints Air</span></span>
+            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.1</span><span class="meta block mt-1">Close</span></span>
+          </li>
+          <li class="entity-row">
+            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#B74223"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Shadow 1</span></span>
+            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#ak-paint" fill="#EBE4D6"/><use href="/images/pots.svg#ak-paint" fill="#B83E26"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg>
+            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Carmine</span><span class="meta block truncate mt-1">AK Interactive · Standard (3rd Gen)</span></span>
+            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 0.9</span><span class="meta block mt-1">Close</span></span>
+          </li>
+          <li class="entity-row">
+            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#C76832"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Base</span></span>
+            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
+            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Orange Rust</span><span class="meta block truncate mt-1">Vallejo · Model Air</span></span>
+            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 0.0</span><span class="meta block mt-1">Close</span></span>
+          </li>
+          <li class="entity-row">
+            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#D48B4D"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Highlight 1</span></span>
+            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" fill="#D28D57"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
+            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Barbarian Flesh</span><span class="meta block truncate mt-1">The Army Painter · Warpaints Air</span></span>
+            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.0</span><span class="meta block mt-1">Close</span></span>
+          </li>
+          <li class="entity-row">
+            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#DEAD6F"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Highlight 2</span></span>
+            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg>
+            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Desert Yellow</span><span class="meta block truncate mt-1">Scale75 · Warfront</span></span>
+            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.0</span><span class="meta block mt-1">Close</span></span>
+          </li>
+        </ol>
+        <p class="text-xs text-muted border-t border-soft pt-3 mt-1">Matched against 3,145 paints from nine brands in Painting Desk's catalogue. ΔE under 2 reads close, under 5 near.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store board 6: Recipes -->
+  <section class="border-b border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div class="md:order-2">
+        <p class="eyebrow eyebrow-accent mb-4">Recipes</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Repeat any paint job</h2>
+        <p class="text-lg text-muted max-w-md">Save the colours, mixes and notes that worked. Painting Desk shows which paints you're missing before you start, and a finished kit keeps the version it was painted with.</p>
+      </div>
+      <div class="md:order-1 card px-5 sm:px-6 pt-6 pb-2">
+        <p class="font-serif text-[2rem] leading-none mb-2">Rust-red cloak</p>
+        <p class="meta mb-1">V2 · Used by 3 kits · 5 colours</p>
+        <p class="text-sm text-muted pb-4 border-b border-ink">Every paint is on your rack.</p>
+        <ol>
+          <li class="entity-row items-start py-3">
+            <span class="font-serif text-2xl leading-none text-faint w-4 flex-none pt-1.5">1</span>
+            <span class="flex-1 min-w-0 space-y-1"><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#ak-paint" fill="#EBE4D6"/><use href="/images/pots.svg#ak-paint" fill="#B83E26"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Carmine</span><span class="meta ml-auto hidden sm:inline">AK Interactive</span></span><span class="block text-sm text-muted pl-[2.625rem]">Basecoat, two thin coats</span></span>
+          </li>
+          <li class="entity-row items-start py-3">
+            <span class="font-serif text-2xl leading-none text-faint w-4 flex-none pt-1.5">2</span>
+            <span class="flex-1 min-w-0 space-y-1"><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" fill="#211913"/><use href="/images/pots.svg#armypainter-cap" fill="#A8322C"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Strong Tone</span><span class="meta ml-auto hidden sm:inline">The Army Painter</span></span><span class="block text-sm text-muted pl-[2.625rem]">Wash, recesses only</span></span>
+          </li>
+          <li class="entity-row items-start py-3">
+            <span class="font-serif text-2xl leading-none text-faint w-4 flex-none pt-1.5">3</span>
+            <span class="flex-1 min-w-0 space-y-1"><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#EBE4D6"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Orange Rust</span><span class="meta ml-auto hidden sm:inline">Vallejo</span></span><span class="block text-sm text-muted pl-[2.625rem]">Airbrushed from above</span></span>
+          </li>
+          <li class="entity-row items-start py-3">
+            <span class="font-serif text-2xl leading-none text-faint w-4 flex-none pt-1.5">4</span>
+            <span class="flex-1 min-w-0 space-y-1"><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#EBE4D6"/><use href="/images/pots.svg#armypainter-paint" fill="#D28D57"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Barbarian Flesh</span><span class="meta ml-auto">2 parts</span></span><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Desert Yellow</span><span class="meta ml-auto">1 part</span></span><span class="block text-sm text-muted pl-[2.625rem]">Edge highlight</span></span>
+          </li>
+          <li class="entity-row items-start py-3">
+            <span class="font-serif text-2xl leading-none text-faint w-4 flex-none pt-1.5">5</span>
+            <span class="flex-1 min-w-0 space-y-1"><span class="flex items-center gap-2.5"><svg class="pot w-8 h-8 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#EBE4D6"/><use href="/images/pots.svg#s75-paint" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg><span class="font-serif text-[1.3rem] leading-none">Desert Yellow</span><span class="meta ml-auto hidden sm:inline">Scale75</span></span><span class="block text-sm text-muted pl-[2.625rem]">Spot highlights on the folds</span></span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store board 7: the Painting Clock -->
+  <section class="border-b border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div>
+        <p class="eyebrow eyebrow-accent mb-4">Painting Clock</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Know where every evening went</h2>
+        <p class="text-lg text-muted max-w-md">Start the clock from a kit and paint. It stays on the Lock Screen while you work, it never starts on its own, and a session can be shortened but never stretched.</p>
+      </div>
+      <div class="card p-6 sm:p-8 text-center">
+        <p class="meta meta-accent mb-3">Painting</p>
+        <p class="font-serif text-7xl sm:text-8xl leading-none tabular-nums mb-3" data-painting-clock="5022">1:23:42</p>
+        <p class="meta mb-8">In Progress</p>
+        <div class="text-left border border-border rounded-[6px] divide-y divide-border mb-3">
+          <p class="font-serif text-[1.5rem] leading-none px-4 py-4">Cavalry lancer</p>
+          <div class="grid grid-cols-3 divide-x divide-border text-sm text-center">
+            <span class="py-3">Paint</span><span class="py-3">Recipe</span><span class="py-3">Photo</span>
+          </div>
+        </div>
+        <span class="btn-secondary w-full pointer-events-none">End session</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store board 8: Stats -->
+  <section class="border-b border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div class="md:order-2">
+        <p class="eyebrow eyebrow-accent mb-4">Nothing to log</p>
+        <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">See what you finish</h2>
+        <p class="text-lg text-muted max-w-md">Every stage move is dated, so the numbers come free: models finished each month, days in each stage and the kit that has stalled longest.</p>
+      </div>
+      <div class="md:order-1 card p-6 sm:p-7">
+        <div class="flex items-end gap-4 pb-4 mb-6 border-b border-ink">
+          <span class="font-serif text-7xl leading-[0.8] tabular-nums" data-count-to="44">44</span>
+          <span><span class="meta block">Models finished this year</span><span class="text-sm text-muted">1.3 a week over the last 90 days</span></span>
+        </div>
+        <p class="meta mb-3">Finished per month</p>
+        <div class="flex items-end gap-1.5 mb-6" aria-hidden="true" data-bars><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]"></span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-rule" style="height:2px"></span><span class="meta text-[0.625rem]">D</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]"></span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-rule" style="height:2px"></span><span class="meta text-[0.625rem]">J</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]"></span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-rule" style="height:2px"></span><span class="meta text-[0.625rem]">F</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">6</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:39px"></span><span class="meta text-[0.625rem]">M</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">10</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:65px"></span><span class="meta text-[0.625rem]">A</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">10</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:65px"></span><span class="meta text-[0.625rem]">M</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">1</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:7px"></span><span class="meta text-[0.625rem]">J</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">1</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:7px"></span><span class="meta text-[0.625rem]">J</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">11</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:72px"></span><span class="meta text-[0.625rem]">A</span></span><span class="flex-1 flex flex-col items-center justify-end gap-1"><span class="meta text-[0.625rem]">5</span><span class="w-full max-w-[1.75rem] rounded-t-[2px] bg-ink/75 bar" style="height:33px"></span><span class="meta text-[0.625rem]">S</span></span></div>
+        <p class="meta mb-1">Time in each stage</p>
+        <div class="value-row"><span>Sprue</span><span><span class="font-serif text-xl">20 d</span> <span class="meta">median</span></span></div>
+        <div class="value-row"><span>Primed</span><span><span class="font-serif text-xl">4 d</span> <span class="meta">median</span></span></div>
+        <div class="value-row border-b-0"><span>In Progress</span><span><span class="font-serif text-xl">14 d</span> <span class="meta">median</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy pitch, as the app's settings rows -->
+  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+    <div>
+      <p class="eyebrow mb-4">Private by design</p>
+      <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">No account. No server.</h2>
+      <p class="text-lg text-muted max-w-md mb-6">Your kits, paints, recipes and photos stay on your iPhone and iPad and sync through your own iCloud. There's nothing to sign up for, and nothing we can see.</p>
+      <a href="/privacy" class="text-link">Read the privacy policy</a>
+    </div>
+    <div class="border-t border-ink">
+      <div class="value-row"><span>Account</span><span class="text-muted">None</span></div>
+      <div class="value-row"><span>Our server</span><span class="text-muted">None</span></div>
+      <div class="value-row"><span>Sync</span><span class="text-muted">Your own iCloud</span></div>
+      <div class="value-row"><span>Photos</span><span class="text-muted">Your Photos library</span></div>
+      <div class="value-row"><span>Analytics</span><span class="text-muted">None</span></div>
+      <div class="value-row"><span>Export</span><span class="text-muted">CSV, or a full archive</span></div>
+    </div>
+  </section>
+
+  <!-- Closing call to action -->
+  <section class="border-t border-rule">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col sm:flex-row sm:items-center gap-8">
+      <img src="/images/icon-192.png" width="96" height="96" alt="Painting Desk app icon" loading="lazy" class="flex-none rounded-[22px]">
+      <div class="flex-1">
+        <h2 class="font-serif text-5xl md:text-6xl leading-[1] mb-3">Start with one kit</h2>
+        <p class="text-lg text-muted">Give it a name and it goes on the shelf, in Sprue. Everything else can wait.</p>
+      </div>
+      <a href="https://apps.apple.com/app/idXXXXXXXXXX" class="btn-primary flex-none">Download on the App Store</a>
+    </div>
+  </section>
+</main>
+
+    <footer class="border-t border-rule text-muted py-12">
+      <div include-html="/includes/footer.html"></div>
+    </footer>
+
+    <script src="/js/includes.js"></script>
+    <script src="/js/app-store.js"></script>
+    <script src="/js/illustrations.js"></script>
+    <script src="/js/colour-tool.js"></script>
+  </body>
+
+  </html>
