@@ -1,5 +1,9 @@
 # Netlify publishes the repo root (no build step). Config lives here only: no _redirects file.
 
+# Pinned here so the dashboard's build settings can't publish anything else
+[build]
+  publish = "."
+
 # Every response: no sniffing, no framing, no referrer path to other sites
 [[headers]]
   for = "/*"

@@ -284,7 +284,7 @@ What caught real bugs on Magic Sudoku:
 
 1. `netlify init` from this folder (or "Add new site → Import from Git" in the dashboard), linked to
    the GitHub repo.
-2. Build command: none. Publish directory: `.` (repo root). Production branch: `main`.
+2. Build command: none. Publish directory: `.` (repo root; pinned by `[build] publish` in `netlify.toml`). Production branch: `main`.
 3. Branch deploys for `dev` **[D]**, so every push has a preview URL.
 4. Add the custom domain `paintingdesk.app` (§11.1), let Netlify provision HTTPS, redirect `www` → apex.
    `.app` is HTTPS-only (HSTS-preloaded for the whole TLD), so nothing on it works over plain HTTP.
