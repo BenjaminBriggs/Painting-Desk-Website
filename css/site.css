@@ -1,0 +1,714 @@
+/* Shared site styles. Every value is the app's (../Plinth/docs/DESIGN.md), and the class names follow its
+   components where there is one: title rule, buttons, card, plinth strip, scrim stamp, pegboard, shelf,
+   selector, value row. */
+
+:root {
+  --paper: 243 238 228;
+  --card: 250 247 240;
+  --soft: 235 228 214;
+  --track: 230 223 208;
+  --border: 224 216 200;
+  --rule: 216 208 194;
+  --plinth: 207 198 179;
+  --faint: 179 168 151;
+  --muted: 109 99 87;
+  --ink: 30 26 22;
+  --accent: 122 46 46;
+  --peg-hole: #CAC4B8;
+}
+
+/* ---------- Type ---------- */
+
+/* Section label: 12px caps, tracked, muted. .eyebrow-accent is the store boards' small line. */
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+.eyebrow-accent {
+  color: rgb(var(--accent));
+}
+
+/* Meta and status words: the small caps beside a name or a state. */
+.meta {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+.meta-accent {
+  color: rgb(var(--accent));
+}
+
+/* The rule under a title: the app hangs every large title from an ink hairline. */
+.title-rule {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgb(var(--ink));
+}
+
+/* Inline links in running text: ink, underlined. Accent stays for the one action. */
+.text-link {
+  color: rgb(var(--ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--muted) / 0.5);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.text-link:hover {
+  text-decoration-color: rgb(var(--ink));
+}
+
+/* Lists in legal and support copy: a short rule instead of a bullet. */
+.dash-list > li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.dash-list > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.6rem;
+  border-top: 1px solid rgb(var(--muted));
+}
+
+/* ---------- Buttons (DESIGN.md: control radius 8, 15–16 / 600) ---------- */
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.875rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  padding: 0.7rem 1.35rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* The one accent action on a page. */
+.btn-primary {
+  background: rgb(var(--accent));
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: #6a2727;
+}
+
+/* Secondary controls take a plinth border. */
+.btn-secondary {
+  background: rgb(var(--card));
+  color: rgb(var(--ink));
+  border: 1px solid rgb(var(--plinth));
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  border-color: rgb(var(--faint));
+}
+
+.btn-sm {
+  min-height: 2.25rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.875rem;
+}
+
+/* App Store links before release (see js/app-store.js): a label, not a button. */
+.btn-primary.is-coming-soon {
+  background: rgb(var(--accent) / 0.55);
+}
+
+/* ---------- Surfaces ---------- */
+
+/* Card: radius 6, one border, no shadow. */
+.card {
+  background: rgb(var(--card));
+  border: 1px solid rgb(var(--border));
+  border-radius: 6px;
+}
+
+/* A photo on its plinth: the strip the app puts under every photo, 10 under a hero. */
+.on-plinth {
+  position: relative;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  border-bottom: 10px solid rgb(var(--plinth));
+}
+
+/* A word laid over a photograph: the days-on-the-desk pill, the stage stamp. */
+.scrim-stamp {
+  position: absolute;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgb(30 26 22 / 0.72);
+  color: #F3EEE4;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* The workshop wall: soft, a 16px grid of 3px holes, a faint shade along the top. */
+.pegboard {
+  background-color: rgb(var(--soft));
+  background-image: radial-gradient(circle, var(--peg-hole) 1.5px, transparent 1.6px);
+  background-size: 16px 16px;
+  background-position: 8px 8px;
+  box-shadow: inset 0 2px 0 rgb(var(--ink) / 0.06);
+}
+
+/* ---------- The shelf: pots standing on rails, a serif name under each ---------- */
+
+.shelf {
+  display: grid;
+  row-gap: 1.75rem;
+}
+
+.shelf-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shelf-cell .pot {
+  width: 5.25rem;
+  height: 5.25rem;
+  margin-bottom: -0.3rem;
+}
+
+/* Cells sit edge to edge, so their rails join into one. */
+.rail {
+  align-self: stretch;
+  margin: 0 -0.5px;
+  height: 6px;
+  border-top: 1px solid rgb(var(--border));
+  background: linear-gradient(rgb(var(--rule)), rgb(var(--plinth)), rgb(var(--faint)));
+  box-shadow: 0 3px 4px rgb(var(--ink) / 0.22);
+}
+
+.shelf-name {
+  margin-top: 0.6rem;
+  padding: 0 0.25rem;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 0.9375rem;
+  line-height: 1;
+  text-align: center;
+  min-height: 2em;
+}
+
+.pot {
+  display: block;
+}
+
+/* ---------- Segmented selector: the kit's stages ---------- */
+
+.selector {
+  display: flex;
+  gap: 0;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgb(var(--track));
+}
+
+.selector input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.selector label {
+  flex: 1 1 auto;
+  display: grid;
+  place-items: center;
+  min-height: 38px;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgb(var(--muted));
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .selector label {
+    padding: 0 0.7rem;
+    font-size: 0.6875rem;
+  }
+}
+
+.selector input:checked + label {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+}
+
+.selector input:focus-visible + label {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 2px;
+}
+
+/* ---------- Rows ---------- */
+
+/* Value row: a label and its answer, hung from a rule. */
+.value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(var(--rule));
+}
+
+.value-row > :first-child {
+  flex: none;
+}
+
+/* Entity row: the pot, paint and recipe rows. */
+.entity-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  min-height: 62px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgb(var(--soft));
+}
+
+.entity-row:last-child {
+  border-bottom: 0;
+}
+
+/* FAQ: disclosure rows. */
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.45rem;
+  border-right: 1.6px solid rgb(var(--faint));
+  border-bottom: 1.6px solid rgb(var(--faint));
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(225deg);
+  margin-top: 0.7rem;
+}
+
+/* ---------- The colour tool ---------- */
+
+/* Chip: 11px caps in a pill, ink when selected (DESIGN.md: chips are the one place for pills). */
+.chip {
+  flex: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--plinth));
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.chip:hover {
+  border-color: rgb(var(--faint));
+}
+
+.chip[aria-pressed="true"] {
+  background: rgb(var(--ink));
+  border-color: rgb(var(--ink));
+  color: rgb(var(--paper));
+}
+
+/* Base colours as pots on a short shelf; the chosen one is lifted off it. */
+.preset {
+  display: block;
+  padding: 0 0.15rem;
+  border-radius: 6px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.preset:hover {
+  transform: translateY(-3px);
+}
+
+.preset[aria-pressed="true"] {
+  transform: translateY(-10px);
+}
+
+.preset:focus-visible,
+.any-colour:focus-within {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 2px;
+}
+
+.any-colour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.any-colour-well {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1.6px dashed rgb(var(--faint));
+  background:
+    linear-gradient(rgb(var(--muted)), rgb(var(--muted))) center / 0.9rem 1.6px no-repeat,
+    linear-gradient(rgb(var(--muted)), rgb(var(--muted))) center / 1.6px 0.9rem no-repeat;
+}
+
+[data-hue-shift] {
+  accent-color: rgb(var(--ink));
+}
+
+/* The hint on the hero photo, and the link it becomes once a colour is taken. */
+.sample-hint[hidden] {
+  display: none;
+}
+
+a.sample-hint {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+a.sample-hint:hover {
+  background: rgb(30 26 22 / 0.88);
+}
+
+/* A drop of the sampled colour where the photo was tapped. */
+.sample-drop {
+  position: absolute;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -1.375rem 0 0 -1.375rem;
+  border-radius: 999px;
+  border: 3px solid #F3EEE4;
+  box-shadow: 0 6px 16px rgb(30 26 22 / 0.35);
+  pointer-events: none;
+  animation: sample-drop 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes sample-drop {
+  0% { transform: scale(0.3); opacity: 0; }
+  20% { transform: scale(1); opacity: 1; }
+  75% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0; }
+}
+
+/* Rows arrive one after another, as the app's do. */
+.row-in {
+  animation: row-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes row-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Motion elsewhere on the landing page (js/illustrations.js) ---------- */
+
+/* The hero's one model at each stage, stacked over the finished photo and faded between. */
+.stage-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.stage-photo.is-shown {
+  opacity: 1;
+}
+
+/* The stages under the photo, as five bars: the current one in ink. The stamp on the photo names it; each bar
+   shows its stage when tapped, and says its name to a screen reader. */
+.stage-row {
+  display: flex;
+  gap: 4px;
+}
+
+.stage-row button {
+  position: relative;
+  flex: 1;
+  height: 16px;
+}
+
+.stage-row button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 2px;
+  background: rgb(var(--rule));
+  transition: background-color 0.3s ease;
+}
+
+.stage-row button:hover::before {
+  background: rgb(var(--faint));
+}
+
+.stage-row button.is-current::before {
+  background: rgb(var(--ink));
+}
+
+.stage-row button:focus-visible {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 2px;
+}
+
+/* Bars grow from the baseline when the stats come into view. */
+[data-bars] .bar {
+  transform-origin: bottom;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+[data-bars].is-waiting .bar {
+  transform: scaleY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row-in,
+  .sample-drop {
+    animation: none;
+  }
+
+  .preset,
+  .stage-photo,
+  .phone-screen,
+  [data-bars] .bar {
+    transition: none;
+  }
+}
+
+/* ---------- The hero's headline ---------- */
+
+/* Set down on load: CSS alone, so it never flashes before a script runs. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-title h1 {
+    animation: set-down 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 650ms both;
+  }
+}
+
+@keyframes set-down {
+  from { opacity: 0; transform: translateY(-28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- The app on iPhone: a drawn frame ---------- */
+
+.device {
+  position: relative;
+  padding: 3.5%;
+  border-radius: 15% / 7%;
+  background: #1E1A16;
+  box-shadow:
+    inset 0 0 0 1.5px #4A4540,
+    0 34px 50px -34px rgb(30 26 22 / 0.55);
+}
+
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12% / 5.6%;
+}
+
+.device-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The app's screens stacked in the frame, faded between in turn. */
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.phone-screen.is-shown {
+  opacity: 1;
+}
+
+/* The Dynamic Island, over the status bar the capture leaves room for. */
+.device::before {
+  content: "";
+  position: absolute;
+  top: 4.9%;
+  left: 50%;
+  width: 26%;
+  height: 2.6%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+  z-index: 2;
+}
+
+/* Side buttons: action and two volume on the left, power on the right. */
+.device-button {
+  position: absolute;
+  width: 3px;
+  background: #3E3B38;
+}
+
+.device-button.is-left {
+  left: -3px;
+  border-radius: 2px 0 0 2px;
+}
+
+.device-button.is-right {
+  right: -3px;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ---------- The hero: the app, with pieces of it set around the phone ---------- */
+
+/* Sized in em throughout, so one font size per breakpoint scales the whole arrangement. Below 640px only the
+   model and the phone stand, side by side; from 640px the four cards join them around the phone. */
+.hero-stage {
+  position: relative;
+  font-size: 13px;
+  height: 32em;
+}
+
+.stage-model,
+.stage-phone,
+.stage-card {
+  position: absolute;
+}
+
+.stage-model {
+  width: 13em;
+  left: calc(50% - 13.5em);
+  top: 1em;
+}
+
+.stage-phone {
+  z-index: 2;
+  width: 13em;
+  left: calc(50% - 1em);
+  top: 3em;
+}
+
+.stage-card {
+  display: none;
+  z-index: 1;
+  padding: 1em 1.15em;
+  box-shadow: 0 18px 40px -22px rgb(30 26 22 / 0.4);
+}
+
+@media (min-width: 640px) {
+  .hero-stage {
+    font-size: 11px;
+    height: 36em;
+  }
+
+  .stage-model {
+    width: 13em;
+    left: auto;
+    right: calc(50% + 6.5em);
+    top: 1.5em;
+  }
+
+  .stage-phone {
+    width: 16em;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .stage-card {
+    display: block;
+  }
+
+  .stage-card.is-desk {
+    width: 14em;
+    right: calc(50% + 9.5em);
+    top: 30em;
+  }
+
+  .stage-card.is-ramp {
+    width: 17em;
+    left: calc(50% + 10em);
+    top: 2.5em;
+  }
+
+  .stage-card.is-clock {
+    width: 12.5em;
+    left: calc(50% + 13em);
+    top: 15em;
+  }
+
+  .stage-card.is-pot {
+    width: 17.5em;
+    left: calc(50% + 9.5em);
+    top: 26em;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-stage {
+    font-size: 13px;
+  }
+}
+
+/* From 1024 the app takes its size from the window's height, so the headline and the App Store button under it
+   still make the first screen (420px is the header, the gaps and the text block; the stage is 36em tall). */
+@media (min-width: 1024px) {
+  .hero-stage {
+    font-size: clamp(11px, calc((100svh - 420px) / 36), 16.5px);
+  }
+}
+
+/* The app arrives first, phone then cards, and the headline under it after; then everything holds still. */
+@media (prefers-reduced-motion: no-preference) {
+  .stage-model,
+  .stage-card,
+  .stage-phone > .device {
+    animation: set-down 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .stage-phone > .device { animation-delay: 100ms; }
+  .stage-model { animation-delay: 250ms; }
+  .stage-card.is-ramp { animation-delay: 400ms; }
+  .stage-card.is-desk { animation-delay: 500ms; }
+  .stage-card.is-clock { animation-delay: 600ms; }
+  .stage-card.is-pot { animation-delay: 700ms; }
+}
