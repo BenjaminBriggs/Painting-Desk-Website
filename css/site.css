@@ -3,18 +3,21 @@
    selector, value row. */
 
 :root {
-  --paper: 243 238 228;
-  --card: 250 247 240;
-  --soft: 235 228 214;
-  --track: 230 223 208;
-  --border: 224 216 200;
-  --rule: 216 208 194;
-  --plinth: 207 198 179;
-  --faint: 179 168 151;
-  --muted: 109 99 87;
-  --ink: 30 26 22;
-  --accent: 122 46 46;
-  --peg-hole: #CAC4B8;
+  --paper: 243 242 240;
+  --card: 250 250 249;
+  --soft: 224 224 220;
+  --track: 218 217 213;
+  --border: 212 211 207;
+  --rule: 204 203 199;
+  --plinth: 182 191 193;
+  --faint: 174 173 171;
+  --muted: 75 84 69;
+  --ink: 28 37 26;
+  /* The accent as text and glyph: peach red deepened to 4.9:1 on paper. */
+  --accent: 183 68 36;
+  /* The accent as a fill, the one action: the true peach red, with ink on it (4.7:1). */
+  --accent-fill: 241 90 48;
+  --peg-hole: #C3C3BE;
 }
 
 /* ---------- Type ---------- */
@@ -95,15 +98,15 @@
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* The one accent action on a page. */
+/* The one accent action on a page: peach red with ink on it. Hover lightens, so the ink keeps its contrast. */
 .btn-primary {
-  background: rgb(var(--accent));
-  color: #fff;
+  background: rgb(var(--accent-fill));
+  color: rgb(var(--ink));
   font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: #6a2727;
+  background: #F36C46;
 }
 
 /* Secondary controls take a plinth border. */
@@ -126,7 +129,7 @@
 
 /* App Store links before release (see js/app-store.js): a label, not a button. */
 .btn-primary.is-coming-soon {
-  background: rgb(var(--accent) / 0.55);
+  background: rgb(var(--accent-fill) / 0.55);
 }
 
 /* ---------- Surfaces ---------- */
@@ -154,8 +157,8 @@
   gap: 0.35rem;
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: rgb(30 26 22 / 0.72);
-  color: #F3EEE4;
+  background: rgb(28 37 26 / 0.72);
+  color: #F3F2F0;
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -403,7 +406,7 @@ a.sample-hint {
 }
 
 a.sample-hint:hover {
-  background: rgb(30 26 22 / 0.88);
+  background: rgb(28 37 26 / 0.88);
 }
 
 /* A drop of the sampled colour where the photo was tapped. */
@@ -413,8 +416,8 @@ a.sample-hint:hover {
   height: 2.75rem;
   margin: -1.375rem 0 0 -1.375rem;
   border-radius: 999px;
-  border: 3px solid #F3EEE4;
-  box-shadow: 0 6px 16px rgb(30 26 22 / 0.35);
+  border: 3px solid #F3F2F0;
+  box-shadow: 0 6px 16px rgb(28 37 26 / 0.35);
   pointer-events: none;
   animation: sample-drop 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -537,10 +540,10 @@ a.sample-hint:hover {
   position: relative;
   padding: 3.5%;
   border-radius: 15% / 7%;
-  background: #1E1A16;
+  background: #18191A;
   box-shadow:
-    inset 0 0 0 1.5px #4A4540,
-    0 34px 50px -34px rgb(30 26 22 / 0.55);
+    inset 0 0 0 1.5px #45474A,
+    0 34px 50px -34px rgb(28 37 26 / 0.55);
 }
 
 .device-screen {
@@ -631,7 +634,7 @@ a.sample-hint:hover {
   display: none;
   z-index: 1;
   padding: 1em 1.15em;
-  box-shadow: 0 18px 40px -22px rgb(30 26 22 / 0.4);
+  box-shadow: 0 18px 40px -22px rgb(28 37 26 / 0.4);
 }
 
 @media (min-width: 640px) {

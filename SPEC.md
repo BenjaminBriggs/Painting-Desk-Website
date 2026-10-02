@@ -73,23 +73,26 @@ contact), release notes.
 
 ## 5. Design
 
-The app's "Studio" direction — warm paper, ink, one accent, serif for names, sans for reading.
-Tokens come from `../Plinth/docs/DESIGN.md`; this table is the subset the site uses.
+The app's "Studio" direction — a neutral grey ground, ink, one accent, serif for names, sans for
+reading. The palette is Sanzo Wada's combination 303 (chosen 2026-10-03, replacing warm paper and
+oxblood): slate-olive ink, peach red for the one action, neutral-grey plinths, Naples yellow for
+highlights. Tokens come from `../Plinth/docs/DESIGN.md`; this table is the subset the site uses.
 
 | Token | Hex | Use on the site |
 |---|---|---|
-| `paper` | `#F3EEE4` | Page background |
-| `card` | `#FAF7F0` | Cards |
-| `soft` | `#EBE4D6` | The pegboard behind the desk and the rack |
-| `track` | `#E6DFD0` | The stage selector's track |
-| `border` | `#E0D8C8` | Card edges |
-| `rule` | `#D8D0C2` | Dividers, the header's bottom edge |
-| `plinth` | `#CFC6B3` | The strip under every photo, secondary button borders, the shelf rail |
-| `faint` | `#B3A897` | Disabled text |
-| `muted` | `#6D6357` | Secondary text, uppercase labels |
-| `ink` | `#1E1A16` | Text, selected states, the rule under a title |
-| `accent` | `#7A2E2E` | **One** action per screen (the App Store button), small uppercase lines |
-| `accentTint` | `#ECD9D3` | Rare highlights |
+| `paper` | `#F3F2F0` | Page background |
+| `card` | `#FAFAF9` | Cards |
+| `soft` | `#E0E0DC` | The pegboard behind the desk and the rack; the glass behind a pot's paint |
+| `track` | `#DAD9D5` | The stage selector's track |
+| `border` | `#D4D3CF` | Card edges |
+| `rule` | `#CCCBC7` | Dividers, the header's bottom edge |
+| `plinth` | `#B6BFC1` | The strip under every photo, secondary button borders, the shelf rail |
+| `faint` | `#AEADAB` | Disabled text |
+| `muted` | `#4B5445` | Secondary text, uppercase labels |
+| `ink` | `#1C251A` | Text, selected states, the text on the App Store button |
+| `accent` | `#B74424` | Accent text: small uppercase lines, days, warnings. Peach red deepened to read at 4.5:1 |
+| `accentFill` | `#F15A30` | **One** action per screen, the App Store button: true peach red with ink on it (4.7:1), lightening on hover |
+| `accentTint` | `#FBE6A0` | Naples yellow, rare highlights |
 
 - **Type:** Instrument Serif (Google Fonts) for anything that names something — headlines, section
   titles, feature names. System sans (`-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`)

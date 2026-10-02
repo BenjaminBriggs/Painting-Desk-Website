@@ -118,7 +118,7 @@ const escapeHTML = (text) => text.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<'
 
 function pot(paint, classes) {
   const use = `/images/pots.svg#${paint.shape}`;
-  return `<svg class="pot ${classes}" viewBox="0 0 1400 1400" aria-hidden="true"><use href="${use}-paint" fill="#EBE4D6"/><use href="${use}-paint" fill="#${paint.hex}"/><use href="${use}-cap" fill="#${paint.cap}"/><use href="${use}-overlay" opacity=".25"/></svg>`;
+  return `<svg class="pot ${classes}" viewBox="0 0 1400 1400" aria-hidden="true"><use href="${use}-paint" fill="#E0E0DC"/><use href="${use}-paint" fill="#${paint.hex}"/><use href="${use}-cap" fill="#${paint.cap}"/><use href="${use}-overlay" opacity=".25"/></svg>`;
 }
 
 function row(step, match, index) {
