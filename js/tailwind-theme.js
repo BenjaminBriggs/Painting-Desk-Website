@@ -15,9 +15,9 @@ tailwind.config = {
         faint: '#AEADAB',
         muted: '#4B5445',
         ink: '#1C251A',
-        // The accent as text (deepened peach red), and as the one action's fill (true peach red, ink on it)
+        // The accent as text, and as the one action's fill (white on it)
         accent: '#B74424',
-        accentFill: '#F15A30',
+        accentFill: '#CA4C28',
         accentTint: '#FBE6A0'
       },
       fontFamily: {

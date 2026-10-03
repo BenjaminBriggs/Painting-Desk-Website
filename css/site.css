@@ -15,8 +15,8 @@
   --ink: 28 37 26;
   /* The accent as text and glyph: peach red deepened to 4.9:1 on paper. */
   --accent: 183 68 36;
-  /* The accent as a fill, the one action: the true peach red, with ink on it (4.7:1). */
-  --accent-fill: 241 90 48;
+  /* The accent as a fill, the one action: peach red one step deeper, the lightest that carries white text (4.6:1). */
+  --accent-fill: 202 76 40;
   --peg-hole: #C3C3BE;
 }
 
@@ -98,15 +98,15 @@
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-/* The one accent action on a page: peach red with ink on it. Hover lightens, so the ink keeps its contrast. */
+/* The one accent action on a page: peach red with white on it. Hover deepens to the accent text colour. */
 .btn-primary {
   background: rgb(var(--accent-fill));
-  color: rgb(var(--ink));
+  color: #FFFFFF;
   font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: #F36C46;
+  background: rgb(var(--accent));
 }
 
 /* Secondary controls take a plinth border. */
@@ -127,9 +127,13 @@
   font-size: 0.875rem;
 }
 
-/* App Store links before release (see js/app-store.js): a label, not a button. */
-.btn-primary.is-coming-soon {
-  background: rgb(var(--accent-fill) / 0.55);
+/* App Store links before release (see js/app-store.js): a label, not a button. Outlined, because a faded
+   fill can't carry white text; the accent text reads at 5.2:1 on the card. */
+.btn-primary.is-coming-soon,
+.btn-primary.is-coming-soon:hover {
+  background: rgb(var(--card));
+  color: rgb(var(--accent));
+  box-shadow: inset 0 0 0 1px rgb(var(--accent-fill));
 }
 
 /* ---------- Surfaces ---------- */

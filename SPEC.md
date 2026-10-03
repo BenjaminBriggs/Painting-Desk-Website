@@ -89,9 +89,9 @@ highlights. Tokens come from `../Plinth/docs/DESIGN.md`; this table is the subse
 | `plinth` | `#B6BFC1` | The strip under every photo, secondary button borders, the shelf rail |
 | `faint` | `#AEADAB` | Disabled text |
 | `muted` | `#4B5445` | Secondary text, uppercase labels |
-| `ink` | `#1C251A` | Text, selected states, the text on the App Store button |
+| `ink` | `#1C251A` | Text, selected states, the rule under a title |
 | `accent` | `#B74424` | Accent text: small uppercase lines, days, warnings. Peach red deepened to read at 4.5:1 |
-| `accentFill` | `#F15A30` | **One** action per screen, the App Store button: true peach red with ink on it (4.7:1), lightening on hover |
+| `accentFill` | `#CA4C28` | **One** action per screen, the App Store button, with white on it (4.6:1); hover deepens to `accent`. Wada's peach red `#F15A30` one step deeper, the lightest that carries white text. Before release the button is an outlined “Coming soon” label in `accent` |
 | `accentTint` | `#FBE6A0` | Naples yellow, rare highlights |
 
 - **Type:** Instrument Serif (Google Fonts) for anything that names something — headlines, section
