@@ -4,7 +4,7 @@ https://paintingdesk.app/press
 
 FACT SHEET
 
-Developer:     Ben Briggs
+Developer:     Benjamin Briggs
 Platforms:     iPhone, iPad, Mac and Apple Vision Pro
 Requires:      iOS 27, iPadOS 27, macOS 27 or visionOS 27
 Availability:  Public beta on TestFlight: https://testflight.apple.com/join/u1uGEpJv
@@ -66,4 +66,4 @@ There's nothing to unlock: every feature is in the public beta. Join on TestFlig
 
 ABOUT THE DEVELOPER
 
-Ben Briggs has spent more than 15 years building apps for iPhone and iPad, and also makes Magic Sudoku. Painting Desk grew out of his own painting: the models, photos and paints throughout the app and its website are his.
+Benjamin Briggs has spent more than 15 years building apps for iPhone and iPad, and also makes Magic Sudoku. Painting Desk grew out of his own painting: the models, photos and paints throughout the app and its website are his.
