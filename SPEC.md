@@ -133,7 +133,7 @@ stay light on paper, carry no third-party marks, and cost a few KB.
   The cards hold still; only the phone and the model's stages move. Sized in em, so one font size
   per breakpoint scales it; from 1024px that size comes from the window's height, so the headline
   and the App Store button still make the first screen. Below 640px it is the model and the phone alone.
-- **The hero is one model at every stage**: `images/stages/<stage>.webp`, cropped to 9:16 by
+- **The hero is one model at every stage**: `images/stages/<stage>.webp`, cropped to 4:5 by
   `python3 tools/stages.py` from the camera originals in `images/models/` (git-ignored, 404 on the
   site). The finished photo loads with the page; the other four load after it, play through once,
   and the stage row under the photo shows any of them on a tap. Check each crop for GW text before
