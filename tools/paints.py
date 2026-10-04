@@ -1,9 +1,9 @@
 """Builds data/paints.json, the catalogue the landing page's colour tool matches against.
 
-Reads the app's bundled catalogue (../Plinth/PlinthKit/Sources/PlinthPaintData/Catalogue) and keeps the paints a
+Reads the app's bundled catalogue (../Plinth/PaintingDeskKit/Sources/PaintingDeskPaintData/Catalogue) and keeps the paints a
 ramp or harmony may answer with: the solid finishes (Finish.matchClass == "solid"). Leaves out everything the site
 must not show (SPEC.md §4): Citadel, licensed ranges, and names that are someone else's mark or worse.
-Pot shape and cap colour per range follow ../Plinth/Plinth/Components/PotShape.swift.
+Pot shape and cap colour per range follow ../Plinth/PaintingDesk/Components/PotShape.swift.
 
     python3 tools/paints.py
 """
@@ -13,7 +13,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CATALOGUE = ROOT.parent / "Plinth/PlinthKit/Sources/PlinthPaintData/Catalogue"
+CATALOGUE = ROOT.parent / "Plinth/PaintingDeskKit/Sources/PaintingDeskPaintData/Catalogue"
 OUT = ROOT / "data/paints.json"
 
 SOLID = {"matte", "satin", "gloss", "fluorescent"}

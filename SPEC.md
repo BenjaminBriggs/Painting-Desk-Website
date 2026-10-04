@@ -2,7 +2,8 @@
 
 The marketing and support site for **Painting Desk**, the miniature-painting tracker for iPhone, iPad,
 Mac and Apple Vision Pro, at **paintingdesk.app** (app repo: `../Plinth`). The app was called Plinth until 2026-10-02
-(§11.1); the code, the bundle ID and the repo folders keep that name, and nothing a visitor sees does.
+(§11.1); the bundle ID (`pro.briggs.plinth`) and the repo's folder (`../Plinth`) keep that name, and
+nothing a visitor sees does.
 Built on the same stack as `../Magic-Sudoku-Website`, so anything learned there applies here.
 
 Status: pages, drawn screens, legal copy, icons and og image done. Name and domain decided (§11.1); blocked on §11.2–3. Last updated 2026-10-02.
@@ -112,7 +113,7 @@ desk on the pegboard, the moves between them in the app's words), the stage sele
 rack (pots on rails, `images/pots.svg`), the colour ramp, a recipe, the painting clock, stats. They
 stay light on paper, carry no third-party marks, and cost a few KB.
 
-- **Pots** come from the app's artwork (`../Plinth/Plinth/Assets.xcassets/PaintPots`: the
+- **Pots** come from the app's artwork (`../Plinth/PaintingDesk/Assets.xcassets/PaintPots`: the
   Generic, ArmyPainter, AK, S75 and Pot shapes, never the GW-named one), composed as `PaintSwatch`
   does: the silhouette in `soft`, the paint's hex over it clipped to its level, the cap, the
   overlay at 25%. Shape and cap colour follow `PotShape.swift`.
@@ -157,7 +158,7 @@ To retake them, on a throwaway simulator (never the one you work on):
 ```
 UDID=$(xcrun simctl create "Painting Desk Web Capture" com.apple.CoreSimulator.SimDeviceType.iPhone-17-Pro-Max com.apple.CoreSimulator.SimRuntime.iOS-27-0)
 xcrun simctl boot $UDID && xcrun simctl bootstatus $UDID -b
-xcrun simctl install $UDID <DerivedData>/Build/Products/Debug-iphonesimulator/Plinth.app
+xcrun simctl install $UDID <DerivedData>/Build/Products/Debug-iphonesimulator/PaintingDesk.app
 xcrun simctl ui $UDID appearance light
 xcrun simctl status_bar $UDID override --time "9:41" --wifiBars 3 --cellularBars 4 --batteryState charged --batteryLevel 100
 # one launch per screen, a screenshot after it settles (about 9 s):
@@ -324,7 +325,7 @@ Ordered by what they block.
    Every capture in `../Plinth/docs/Screenshots/en-US/iPhone/` (checked 2026-10-02) shows GW
    marks: "Warhammer 40,000" in the kit's tags, Citadel ranges and paint names on the rack, colour,
    recipe and stats shots, and GW unit names on the desk, kit and clock. That breaks §4 here and
-   app SPEC §10.6 for the App Store set itself. Fix in the app's demo seed (`PlinthKit/Sources/PlinthDemo`)
+   app SPEC §10.6 for the App Store set itself. Fix in the app's demo seed (`PaintingDeskKit/Sources/PaintingDeskDemo`)
    and recapture.
 6. **Analytics:** none **[D]**. Keeps the privacy page true to "no tracking". If ever added, it must
    be cookieless and named in the privacy policy.

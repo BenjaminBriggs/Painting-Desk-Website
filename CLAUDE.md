@@ -1,8 +1,8 @@
 # CLAUDE.md
 
 Marketing and support site for Painting Desk, the miniature-painting tracker, at paintingdesk.app
-(app repo: `../Plinth`). The app was called Plinth until 2026-10-02: the code, bundle ID
-(`pro.briggs.plinth`) and repo folders keep that name; copy, titles and meta never use it (SPEC.md §11.1).
+(app repo: `../Plinth`). The app was called Plinth until 2026-10-02: the bundle ID
+(`pro.briggs.plinth`) and the repo's folder (`../Plinth`) keep that name; copy, titles and meta never use it (SPEC.md §11.1).
 A lowercase "plinth" is still the physical display base, the `plinth` colour token and the
 `.on-plinth` class (the strip under a photo).
 **What the site is and why lives in `SPEC.md` — read it first.** Same stack as
