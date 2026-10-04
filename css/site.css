@@ -344,6 +344,35 @@
   color: rgb(var(--paper));
 }
 
+/* A row that scrolls sideways runs edge to edge of its card, but starts (and ends) in line with the card's content:
+   the negative margin takes it to the edges, the padding puts the first item back. The ::after keeps the end
+   padding, which Safari drops in a scrolling flex row. --bleed is the card's own side padding. */
+.scroll-row {
+  --bleed: 1.25rem;
+  display: flex;
+  gap: 0.375rem;
+  overflow-x: auto;
+  margin-inline: calc(var(--bleed) * -1);
+  padding-inline: var(--bleed);
+  scroll-padding-inline: var(--bleed);
+  scrollbar-width: none;
+}
+
+.scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-row::after {
+  content: "";
+  flex: 0 0 1px;
+}
+
+@media (min-width: 640px) {
+  .scroll-row {
+    --bleed: 1.5rem;
+  }
+}
+
 /* Base colours as pots on a short shelf; the chosen one is lifted off it. */
 .preset {
   display: block;
