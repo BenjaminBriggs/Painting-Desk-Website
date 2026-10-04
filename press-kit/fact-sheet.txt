@@ -1,0 +1,69 @@
+PAINTING DESK: PRESS KIT
+https://paintingdesk.app/press
+
+
+FACT SHEET
+
+Developer:     Ben Briggs
+Platforms:     iPhone, iPad, Mac and Apple Vision Pro
+Requires:      iOS 27, iPadOS 27, macOS 27 or visionOS 27
+Availability:  Public beta on TestFlight: https://testflight.apple.com/join/u1uGEpJv
+               App Store launch to come.
+Languages:     English
+Website:       https://paintingdesk.app
+Press:         press@paintingdesk.app
+
+
+ONE LINE
+
+Painting Desk is a miniature-painting tracker for iPhone, iPad, Mac and Apple Vision Pro: every kit from sprue to done, every pot on your rack, and colour tools that always answer with a real paint.
+
+
+ONE PARAGRAPH
+
+Painting Desk is a miniature-painting tracker for iPhone, iPad, Mac and Apple Vision Pro. Every model a painter owns goes on the shelf, sorted by stage from Sprue to Done, and the few they're painting now go on the desk, where each kit counts the days it has sat there. Photos taken along the way are stamped with their stage, and finished kits land on the Showcase. The paint rack holds every pot they own, from a catalogue of over 4,700 paints across ten brands, and its colour tools build ramps and harmonies that always answer with a real paint. There's no account and no server: everything stays on the painter's devices and in their own iCloud.
+
+
+FULL DESCRIPTION
+
+Painting Desk is a tracker for miniature painters, built for iPhone, iPad, Mac and Apple Vision Pro.
+
+Every model a painter owns goes on the shelf: the backlog, the pile of shame, all of it, sorted by stage from Sprue to Done. The few they're painting now go on the desk, where each kit counts the days it has sat there. A kit moves to its next stage in two taps, and Painting Desk offers to take a photo on the way, stamped with that stage. Finished kits land on the Showcase with their best photos.
+
+The paint rack holds every pot they own, from a catalogue of over 4,700 paints across ten brands. Paints go on by ticking them off brand by brand, by searching, from a spreadsheet, or on iPhone and iPad by scanning the pots with the camera. Each pot shows how much is left, and Painting Desk says when the last one is running low.
+
+The colour tools start from a paint or a colour picked from a photo. Ramps shift in hue as well as lightness, cooler in the shadows and warmer in the highlights, and every step, harmony and substitute is a real paint, with how close it is and the nearest pot already on the rack. Recipes keep the colours, mixes and notes that worked, show which paints are missing before a session starts, and keep the version a finished kit was painted with.
+
+An optional painting clock times sessions at the desk and runs as a Live Activity; it never starts on its own. Stats come free from the dates each kit changed stage: models finished each month, days in each stage, and the kit that has stalled longest.
+
+There's no account, no server, no adverts and no analytics. Everything stays on the painter's devices and syncs through their own iCloud, and paints, kits and the whole collection can be exported at any time.
+
+
+KEY FEATURES
+
+- The shelf and the desk: every kit on the shelf by stage; the few being painted on the desk, counting their days.
+- Every stage photographed: two taps to move a kit on, with a photo stamped with the stage.
+- The Showcase: finished kits with their best photos.
+- A paint rack of over 4,700 paints across ten brands, added by swatch grid, search, spreadsheet or camera scan.
+- Pot levels, and a warning when the last pot is running low.
+- Colour tools: hue-shifted ramps, harmonies and substitutes, every step a real paint with its colour difference.
+- Recipes with mixes and notes, missing paints flagged, and versions kept.
+- An optional painting clock with a Live Activity.
+- Stats with nothing to log.
+- No account, no server, no adverts and no analytics; iCloud sync and full export.
+
+
+TEN MINUTES WITH PAINTING DESK
+
+1. Add a kit. On the Desk, tap + and give it a name. Add 1 to Sprue puts it on the shelf; open the shelf and choose Put on the desk.
+2. Move it on a stage. Open the kit and move its stage from Sprue to Built. Painting Desk asks "Photo before you move on?", and the photo is stamped Built.
+3. Fill the rack. On Paints, tap + to add paints: search by name, tick pots off brand by brand, or on iPhone and iPad scan them with the camera.
+4. Build a ramp. Open any paint and choose Open in Studio. Switch between Ramp, the harmonies and Substitutes, and drag Hue shift to zero to see what it does.
+5. Paint, then finish. On a kit, tap the timer to start painting; the clock runs as a Live Activity. When the kit is done, Finish model on the clock moves it to Done, and it lands on the Showcase.
+
+There's nothing to unlock: every feature is in the public beta. Join on TestFlight at https://testflight.apple.com/join/u1uGEpJv
+
+
+ABOUT THE DEVELOPER
+
+Ben Briggs has spent more than 15 years building apps for iPhone and iPad, and also makes Magic Sudoku. Painting Desk grew out of his own painting: the models, photos and paints throughout the app and its website are his.

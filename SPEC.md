@@ -36,10 +36,15 @@ the site should speak it without explaining it.
 | `/support` | App Review support URL | Contact email, FAQ, how to report a bug |
 | `/privacy` | App Review privacy URL | What is stored (on device and in the user's iCloud), what is not (no server, no account, no analytics), contact |
 | `/terms` | Only if the app is paid or has purchases (§11) | Licence (Apple standard EULA), purchase/subscription terms, refunds via Apple |
+| `/press` | Press kit, after Magic Sudoku's (2026-10-04) | Fact sheet, key features, three descriptions with copy buttons, a ten-minute reviewer's guide, the beta, icon (light and dark), a photograph, iPhone and iPad screenshots, the zip, about the developer, `press@` |
 | `/404` | Unknown paths | Way back home; `noindex` |
 
-Later, only if needed: a press kit (`/press`: icon, screenshots, one-paragraph description,
-contact), release notes.
+The press kit's files live in `press-kit/`: full-size assets, `thumbs/` for the page, `fact-sheet.txt`
+(the page's words, the source for the descriptions on it) and `painting-desk-press-kit.zip`. The
+screenshots are the app's demo store in light mode, captured as in §5.2 (iPhone 17 Pro Max and
+iPad Pro 13-inch, the App Store's store order); retake them, rebuild the thumbs and the zip whenever
+the app's look changes. Like the hero phone, they carry the demo store's Games Workshop names
+(§4's exception). Later, only if needed: release notes.
 
 ## 4. Content
 
@@ -63,7 +68,7 @@ contact), release notes.
 **Rules:**
 
 - **No Games Workshop marks** anywhere on the site, in copy, alt text, keywords or file names (one
-  deliberate exception: the hero iPhone's demo-store screens, §5.2) —
+  deliberate exception: the hero iPhone's demo-store screens, §5.2, and the press kit's screenshots, §3) —
   no "Warhammer", "40k", "Citadel", "Age of Sigmar". Same IP position as the app (app SPEC §10.6,
   §11). Generic terms reach the same people: miniature, wargaming, tabletop, RPG, scale model.
   This includes screenshots: check no paint names in a shot are a GW product name before using it.
@@ -226,6 +231,8 @@ Plinth-Website/
 ├── index.html            landing
 ├── support.html          support (App Review)
 ├── privacy.html          privacy policy (App Review)
+├── press.html            press kit (§3)
+├── press-kit/            its assets, thumbs, fact sheet and zip
 ├── 404.html              not found (noindex)
 ├── includes/
 │   ├── header.html       nav bar: icon, serif name, Support, Privacy, App Store button
