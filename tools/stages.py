@@ -1,7 +1,7 @@
 """Builds images/stages/<stage>.webp, the hero's one model at each stage, from the originals in images/models.
 
-Each original is cropped to the hero card's 4:5 photo around the model, then written at 720 x 900 (the photo is shown
-at most 231px wide, so this is 3x). The originals are big camera files and stay out of git and off the site
+Each original is cropped square around the model, as the app shows every photo, then written at 720 x 720 (the
+hero card shows it at most 231px wide, so this is 3x). The originals are big camera files and stay out of git and off the site
 (.gitignore, netlify.toml). Check every crop for Games Workshop text before shipping it (SPEC.md §4): the sprue's
 frame carries "Warhammer" moulded along its right edge, which is why its crop stops short of it.
 
@@ -18,11 +18,11 @@ OUT = ROOT / "images/stages"
 
 # Stage: (original, centre x, centre y, crop height as a fraction of the original's height)
 CROPS = {
-    "sprue": ("sprue.JPG", 0.465, 0.535, 0.70),
+    "sprue": ("sprue.JPG", 0.465, 0.535, 0.5625),
     "built": ("built.JPG", 0.47, 0.44, 0.51),
     "primed": ("primed.JPG", 0.31, 0.58, 0.665),
-    "in-progress": ("in-progress.JPG", 0.41, 0.535, 0.77),
-    "done": ("done-3.jpeg", 0.565, 0.47, 0.92),
+    "in-progress": ("in-progress.JPG", 0.41, 0.535, 0.75),
+    "done": ("done-3.jpeg", 0.565, 0.47, 0.82),
 }
 
 
@@ -32,13 +32,12 @@ def main():
         image = ImageOps.exif_transpose(Image.open(ORIGINALS / name)).convert("RGB")
         width, height = image.size
         crop_height = round(height * fraction)
-        crop_width = round(crop_height * 4 / 5)
+        crop_width = crop_height
         if crop_width > width:
-            crop_width = width
-            crop_height = round(crop_width * 5 / 4)
+            crop_width = crop_height = width
         left = min(max(0, round(centre_x * width - crop_width / 2)), width - crop_width)
         top = min(max(0, round(centre_y * height - crop_height / 2)), height - crop_height)
-        frame = image.crop((left, top, left + crop_width, top + crop_height)).resize((720, 900), Image.LANCZOS)
+        frame = image.crop((left, top, left + crop_width, top + crop_height)).resize((720, 720), Image.LANCZOS)
         path = OUT / f"{stage}.webp"
         frame.save(path, "WEBP", quality=80, method=6)
         print(f"{stage:12} {path.stat().st_size // 1024} KB")

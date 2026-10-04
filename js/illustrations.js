@@ -14,10 +14,9 @@ function whenSeen(element, action) {
 }
 
 // The hero: one model, Sprue to Done. The finished photo is drawn first; the other four load after it, play
-// through once, and from then on the stage row shows whichever stage is tapped.
+// through once, and from then on the stage bars show whichever stage is tapped.
 const stageButtons = [...document.querySelectorAll('[data-stage]')];
 const stagePhotos = [...document.querySelectorAll('[data-stage-photo]')];
-const stageStamp = document.querySelector('[data-stage-stamp]');
 let stageTimers = [];
 
 function showStage(name) {
@@ -27,7 +26,6 @@ function showStage(name) {
     button.setAttribute('aria-pressed', String(isCurrent));
   });
   stagePhotos.forEach((photo) => photo.classList.toggle('is-shown', photo.dataset.stagePhoto === name));
-  stageStamp.textContent = name;
 }
 
 stageButtons.forEach((button) => {

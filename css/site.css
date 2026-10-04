@@ -620,10 +620,11 @@ a.sample-hint:hover {
   box-shadow: 0 18px 40px -22px rgb(28 37 26 / 0.4);
 }
 
-/* The model's photo at the top of its card, 4:5 (tools/stages.py crops them so), on the plinth strip. */
+/* The model's photo at the top of its card, square as the app shows every photo (tools/stages.py crops them so),
+   on the plinth strip. */
 .kit-photo {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
   overflow: hidden;
   border-bottom: 0.6em solid rgb(var(--plinth));
 }
@@ -685,7 +686,7 @@ a.sample-hint:hover {
   .stage-card.is-desk {
     width: 14em;
     right: calc(50% + 9.5em);
-    top: 27.5em;
+    top: 24.5em;
   }
 
   .stage-card.is-ramp {
