@@ -126,16 +126,6 @@
   padding: 0.45rem 0.9rem;
   font-size: 0.875rem;
 }
-
-/* App Store links before release (see js/app-store.js): a label, not a button. Outlined, because a faded
-   fill can't carry white text; the accent text reads at 5.2:1 on the card. */
-.btn-primary.is-coming-soon,
-.btn-primary.is-coming-soon:hover {
-  background: rgb(var(--card));
-  color: rgb(var(--accent));
-  box-shadow: inset 0 0 0 1px rgb(var(--accent-fill));
-}
-
 /* ---------- Surfaces ---------- */
 
 /* Card: radius 6, one border, no shadow. */

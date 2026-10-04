@@ -205,10 +205,13 @@ the repo entirely.
 
 ### 6.4 App Store release switch
 
-`js/app-store.js`, copied from Magic Sudoku. `const APP_RELEASED = false;` turns every
-`apps.apple.com` link into a disabled "Coming soon to the App Store" label (the header's says
-"Coming soon"), and swaps any element's text that carries `data-coming-soon="…"`. Launch day: set it
-to `true` and push. The App Store URL is a placeholder until the app has an ID (§11).
+`js/app-store.js`, copied from Magic Sudoku. `const APP_RELEASED = false;` points every
+`apps.apple.com` link at the public TestFlight beta (`TESTFLIGHT_URL`,
+https://testflight.apple.com/join/u1uGEpJv, since 2026-10-04) and relabels it "Join the TestFlight
+beta" (the header's says "Join the beta"), and swaps any element's text that carries
+`data-beta="…"`. The privacy policy's "The beta" section says what TestFlight shares with us; take it
+out after launch if the beta closes. Launch day: set it to `true` and push. The App Store URL is a
+placeholder until the app has an ID (§11).
 
 ### 6.5 Images
 
@@ -270,8 +273,8 @@ What caught real bugs on Magic Sudoku:
    The header is the usual casualty at 375.
 2. Crawl every internal link and `#anchor` against `netlify dev`; all 200, all anchors exist.
 3. No console errors on any page.
-4. Release switch in both states: no live `apps.apple.com` links while unreleased; all links back
-   when released.
+4. Release switch in both states: while unreleased, no `apps.apple.com` links and every one of them
+   pointing at TestFlight; when released, all App Store links back.
 5. `/support` and `/privacy` load — App Review taps them.
 
 ## 10. Deployment and git
