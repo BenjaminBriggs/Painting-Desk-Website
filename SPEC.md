@@ -1,7 +1,7 @@
 # Painting Desk Website — Spec
 
-The marketing and support site for **Painting Desk**, the miniature-painting tracker for iPhone and
-iPad, at **paintingdesk.app** (app repo: `../Plinth`). The app was called Plinth until 2026-10-02
+The marketing and support site for **Painting Desk**, the miniature-painting tracker for iPhone, iPad,
+Mac and Apple Vision Pro, at **paintingdesk.app** (app repo: `../Plinth`). The app was called Plinth until 2026-10-02
 (§11.1); the code, the bundle ID and the repo folders keep that name, and nothing a visitor sees does.
 Built on the same stack as `../Magic-Sudoku-Website`, so anything learned there applies here.
 
