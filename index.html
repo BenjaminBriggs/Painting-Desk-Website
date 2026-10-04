@@ -47,10 +47,11 @@
   <section class="pt-10 md:pt-14 lg:pt-6 pb-16 md:pb-20 overflow-hidden">
     <div class="hero-stage max-w-6xl mx-auto">
       <!-- One model, Sprue to Done (images/stages, built by tools/stages.py). The finished photo is the page's own;
-           the other four load after it and js/illustrations.js plays them through once. -->
-    <figure class="stage-model">
-      <div class="on-plinth cursor-crosshair" data-eyedropper>
-        <img src="/images/stages/done.webp" width="720" height="1280" alt="A finished miniature, an armoured warrior with sword and pistol, standing on a black display plinth. Tap it to sample a colour." class="block w-full h-auto">
+           the other four load after it and js/illustrations.js plays them through once. A card, like the pieces
+           of the app around the phone. -->
+    <figure class="stage-model card">
+      <div class="kit-photo cursor-crosshair" data-eyedropper>
+        <img src="/images/stages/done.webp" width="720" height="1280" alt="A finished miniature, an armoured warrior with sword and pistol, standing on a black display plinth. Tap it to sample a colour.">
         <img data-src="/images/stages/sprue.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Sprue">
         <img data-src="/images/stages/built.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Built">
         <img data-src="/images/stages/primed.webp" width="720" height="1280" alt="" aria-hidden="true" class="stage-photo" data-stage-photo="Primed">
@@ -67,8 +68,11 @@
           <svg class="w-3 h-3 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
         </a>
       </div>
-      <figcaption class="stage-row pt-3" role="group" aria-label="See the model at each stage">
+      <figcaption class="kit-body">
+        <span class="font-serif text-[1.45em] leading-none">Veteran with sword</span>
+        <div class="stage-row" role="group" aria-label="See the model at each stage">
         <button type="button" data-stage aria-pressed="false"><span class="sr-only">Sprue</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">Built</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">Primed</span></button><button type="button" data-stage aria-pressed="false"><span class="sr-only">In Progress</span></button><button type="button" data-stage aria-pressed="true" class="is-current"><span class="sr-only">Done</span></button>
+      </div>
       </figcaption>
     </figure>
 

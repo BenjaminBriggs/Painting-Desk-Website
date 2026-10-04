@@ -615,6 +615,33 @@ a.sample-hint:hover {
   width: 13em;
   left: calc(50% - 13.5em);
   top: 1em;
+  margin: 0;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -22px rgb(28 37 26 / 0.4);
+}
+
+/* The model's photo at the top of its card, cropped to 4:5 and standing on the plinth strip. */
+.kit-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-bottom: 0.6em solid rgb(var(--plinth));
+}
+
+.kit-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+
+.kit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+  padding: 0.85em 1em 0.95em;
 }
 
 .stage-phone {
@@ -638,9 +665,9 @@ a.sample-hint:hover {
   }
 
   .stage-model {
-    width: 13em;
+    width: 14em;
     left: auto;
-    right: calc(50% + 6.5em);
+    right: calc(50% + 9.5em);
     top: 1.5em;
   }
 
@@ -658,7 +685,7 @@ a.sample-hint:hover {
   .stage-card.is-desk {
     width: 14em;
     right: calc(50% + 9.5em);
-    top: 30em;
+    top: 27.5em;
   }
 
   .stage-card.is-ramp {

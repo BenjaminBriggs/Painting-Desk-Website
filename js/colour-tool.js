@@ -225,8 +225,14 @@ if (colourTool) {
     const context = canvas.getContext('2d', { willReadFrequently: true });
     context.drawImage(photo, 0, 0);
     const bounds = frame.querySelector('img').getBoundingClientRect();
-    const x = Math.round(((event.clientX - bounds.left) / bounds.width) * photo.naturalWidth);
-    const y = Math.round(((event.clientY - bounds.top) / bounds.height) * photo.naturalHeight);
+    // The photo is cropped to its card (object-fit: cover), so undo the crop: the scale that fills the box, and
+    // how far object-position shifts the overflow.
+    const scale = Math.max(bounds.width / photo.naturalWidth, bounds.height / photo.naturalHeight);
+    const [positionX, positionY] = getComputedStyle(photo).objectPosition.split(' ').map((p) => parseFloat(p) / 100);
+    const offsetX = (bounds.width - photo.naturalWidth * scale) * positionX;
+    const offsetY = (bounds.height - photo.naturalHeight * scale) * positionY;
+    const x = Math.round((event.clientX - bounds.left - offsetX) / scale);
+    const y = Math.round((event.clientY - bounds.top - offsetY) / scale);
     const radius = 7;
     const { data } = context.getImageData(Math.max(0, x - radius), Math.max(0, y - radius), radius * 2 + 1, radius * 2 + 1);
     const sum = [0, 0, 0];
