@@ -66,4 +66,4 @@ There's nothing to unlock: every feature is in the public beta. Join on TestFlig
 
 ABOUT THE DEVELOPER
 
-Benjamin Briggs has spent more than 15 years building apps for iPhone and iPad, and also makes Magic Sudoku. Painting Desk grew out of his own painting: the models, photos and paints throughout the app and its website are his.
+Benjamin Briggs has spent more than 15 years building apps for iPhone and iPad. Painting Desk grew out of his own painting: the models, photos and paints throughout the app and its website are his.
