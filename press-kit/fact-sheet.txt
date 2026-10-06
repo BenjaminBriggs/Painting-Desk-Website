@@ -34,7 +34,7 @@ The paint rack holds every pot they own, from a catalogue of over 4,700 paints a
 
 The colour tools start from a paint or a colour picked from a photo. Ramps shift in hue as well as lightness, cooler in the shadows and warmer in the highlights, and every step, harmony and substitute is a real paint, with how close it is and the nearest pot already on the rack. Recipes keep the colours, mixes and notes that worked, show which paints are missing before a session starts, and keep the version a finished kit was painted with.
 
-An optional painting clock times sessions at the desk and runs as a Live Activity; it never starts on its own. Stats come free from the dates each kit changed stage: models finished each month, days in each stage, and the kit that has stalled longest.
+An optional painting clock times sessions at the desk and runs as a Live Activity; any session can be changed afterwards, or added by hand. Stats come free from the dates each kit changed stage: models finished each month, days in each stage, and the kit that has stalled longest.
 
 There's no account, no server, no adverts and no analytics. Everything stays on the painter's devices and syncs through their own iCloud, and paints, kits and the whole collection can be exported at any time.
 
