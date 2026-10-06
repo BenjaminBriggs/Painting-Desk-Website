@@ -320,20 +320,41 @@
 
 /* ---------- The colour tool ---------- */
 
-/* Base colours as pots on a short shelf; the chosen one is lifted off it. */
+/* Base colours as pots on a short shelf. */
 .preset {
+  position: relative;
   display: block;
   padding: 0 0.15rem;
   border-radius: 6px;
+}
+
+.preset .pot {
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.preset:hover {
+.preset:hover .pot {
   transform: translateY(-3px);
 }
 
-.preset[aria-pressed="true"] {
-  transform: translateY(-10px);
+/* The chosen pot: a dot on the shelf's edge under it, not a pot lifted off it. */
+.preset::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 14px);
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 999px;
+  background: rgb(var(--ink));
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.preset[aria-pressed="true"]::after {
+  opacity: 1;
+  transform: none;
 }
 
 .preset:focus-visible,
@@ -550,7 +571,8 @@ a.sample-hint:hover {
     animation: none;
   }
 
-  .preset,
+  .preset .pot,
+  .preset::after,
   .stage-photo,
   .phone-screen,
   [data-bars] .bar {
