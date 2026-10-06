@@ -43,8 +43,8 @@ The press kit's files live in `press-kit/`: full-size assets, `thumbs/` for the 
 (the page's words, the source for the descriptions on it) and `painting-desk-press-kit.zip`. The
 screenshots are the app's demo store in light mode, captured as in §5.2 (iPhone 17 Pro Max and
 iPad Pro 13-inch, the App Store's store order); retake them, rebuild the thumbs and the zip whenever
-the app's look changes. Like the hero phone, they carry the demo store's Games Workshop names
-(§4's exception). Later, only if needed: release notes.
+the app's look changes. Like the hero phone, they come from the demo store, which carries no Games
+Workshop marks since 2026-10-06 (§5.2). Later, only if needed: release notes.
 
 ## 4. Content
 
@@ -67,9 +67,8 @@ the app's look changes. Like the hero phone, they carry the demo store's Games W
 
 **Rules:**
 
-- **No Games Workshop marks** anywhere on the site, in copy, alt text, keywords or file names (one
-  deliberate exception: the hero iPhone's demo-store screens, §5.2, and the press kit's screenshots, §3) —
-  no "Warhammer", "40k", "Citadel", "Age of Sigmar". Same IP position as the app (app SPEC §10.6,
+- **No Games Workshop marks** anywhere on the site, in copy, alt text, keywords, file names or
+  screenshots — no "Warhammer", "40k", "Citadel", "Age of Sigmar". Same IP position as the app (app SPEC §10.6,
   §11). Generic terms reach the same people: miniature, wargaming, tabletop, RPG, scale model.
   This includes screenshots: check no paint names in a shot are a GW product name before using it.
 - Spelling: British (**colour**) **[D]** — the app's own copy and docs use it.
@@ -156,10 +155,11 @@ stay light on paper, carry no third-party marks, and cost a few KB.
 
 The hero's iPhone (a drawn frame at the centre of the hero) shows the app's
 own screens in turn: Desk, Kit, Paint Rack, Colour, Showcase, Shelf (`images/screens/*.webp`,
-420px wide, 2× the frame). They are light-mode captures of the app's **demo store**, so they carry
-its Games Workshop kit names, "Warhammer 40,000" tags and Citadel paints. That is a deliberate
-exception to §4, Ben's call on 2026-10-02: the phone shows the app as it really is. It ends when
-the demo store is made GW-free (§11.5), and the captures should be retaken then.
+600px wide); the Shelf-and-Desk section shows three of the same files. They are light-mode captures
+of the app's **demo store**, which has carried no Games Workshop marks since 2026-10-06: generic kit
+names, factions and games, no Citadel pot, and a paint library of the rack's own ranges
+(`../Plinth` branch `claude/generic-demo-data` until it merges). Retake them from a build with that
+in it, never an older one.
 
 To retake them, on a throwaway simulator (never the one you work on):
 
@@ -171,14 +171,14 @@ xcrun simctl ui $UDID appearance light
 xcrun simctl status_bar $UDID override --time "9:41" --wifiBars 3 --cellularBars 4 --batteryState charged --batteryLevel 100
 # one launch per screen, a screenshot after it settles (about 9 s):
 #   --demo --tab desk                                   desk
-#   --demo --tab desk --screen kit/subductor-squad      kit
+#   --demo --tab desk --screen kit/riot-squad           kit
 #   --demo --tab paints -rackLayout grid                paints
-#   --demo --tab paints --screen colour/citadel.layer.ushabti-bone   colour
+#   --demo --tab paints --screen colour/scale75.scale-color.thar-brown   colour
 #   --demo --tab showcase                               showcase
 #   --demo --tab desk --screen shelf                    shelf
 xcrun simctl launch --terminate-running-process $UDID pro.briggs.plinth <arguments>
 xcrun simctl io $UDID screenshot <screen>.png
-cwebp -q 80 -resize 420 0 -metadata none <screen>.png -o images/screens/<screen>.webp
+cwebp -q 80 -resize 600 0 -metadata none <screen>.png -o images/screens/<screen>.webp
 xcrun simctl shutdown $UDID && xcrun simctl delete $UDID
 ```
 
@@ -332,11 +332,8 @@ Ordered by what they block.
    in `netlify.toml`). Bundle ID `pro.briggs.plinth`.
 5. **Screenshots ready for the web.** No longer blocks the site: the landing page draws its screens
    (§5.1). It still blocks the App Store listing.
-   Every capture in `../Plinth/docs/Screenshots/en-US/iPhone/` (checked 2026-10-02) shows GW
-   marks: "Warhammer 40,000" in the kit's tags, Citadel ranges and paint names on the rack, colour,
-   recipe and stats shots, and GW unit names on the desk, kit and clock. That breaks §4 here and
-   app SPEC §10.6 for the App Store set itself. Fix in the app's demo seed (`PaintingDeskKit/Sources/PaintingDeskDemo`)
-   and recapture.
+   The demo seed is GW-free since 2026-10-06 (§5.2); the App Store set in
+   `../Plinth/docs/Screenshots/en-US/` still predates it and needs recapturing (`Tools/screenshots.sh`).
 6. **Analytics:** none **[D]**. Keeps the privacy page true to "no tracking". If ever added, it must
    be cookieless and named in the privacy policy.
 
