@@ -129,7 +129,8 @@ stay light on paper, carry no third-party marks, and cost a few KB.
 - **The colour section is live** (`js/colour-tool.js`): six preset pots, any colour from a picker,
   or a tap on the hero photo (a 15px patch averaged, never one pixel). The ramp only, laid out as the
   app's Studio: the base row with Change, each step's paint with its ΔE badge (green close, ochre near,
-  red different), and RampToolbar's bar pinned under it (Steps, Shift, and Paints by brand). It ports
+  red different), and the three shift sliders (value, chroma and hue per step). No step counts or paint
+  choice: always two steps either side, from every brand. It ports
   `ColourEngine` (OKLab, ramp with RampSettings, ΔE × 100, close < 2,
   near < 5) and matches against `data/paints.json`, built by `python3 tools/paints.py` from the app's
   catalogue: solid finishes only, no Citadel, no licensed ranges (D&D), no mediums or primers, no

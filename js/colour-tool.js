@@ -70,10 +70,10 @@ async function loadCatalogue() {
   return catalogue;
 }
 
-function nearest(lab, paints) {
+function nearest(lab) {
   let best = null;
   let bestDistance = Infinity;
-  for (const paint of paints) {
+  for (const paint of catalogue) {
     const d = distance(paint.lab, lab);
     if (d < bestDistance) {
       best = paint;
@@ -115,16 +115,12 @@ function row(step, match, index, animate) {
 if (colourTool) {
   const header = colourTool.querySelector('[data-colour-base]');
   const rows = colourTool.querySelector('[data-colour-rows]');
-  const cells = colourTool.querySelectorAll('[data-ramp-group]');
-  const panels = colourTool.querySelectorAll('[data-ramp-panel]');
-  const brands = colourTool.querySelectorAll('[data-ramp-brand]');
   const presets = document.querySelectorAll('[data-preset]');
 
-  // The base is a paint from a preset, or a bare colour from a picker or the photo. The settings are the app's
-  // defaults; rampBrand is the brand the ramp is filled from, empty for all of them.
+  // The base is a paint from a preset, or a bare colour from a picker or the photo. The settings start at the app's
+  // defaults; the page moves only the shift, always two steps either side.
   let base = null;
   const settings = { shadows: 2, highlights: 2, lStep: 0.08, cStep: 0.02, hueShift: 12 };
-  let rampBrand = '';
 
   function drawHeader() {
     const leading = base.paint
@@ -139,87 +135,29 @@ if (colourTool) {
     drawHeader();
     await loadCatalogue();
     const lab = base.paint ? base.paint.lab : hexToLab(base.hex);
-    const paints = rampBrand ? catalogue.filter((paint) => paint.brand === rampBrand) : catalogue;
-    // A preset is in the catalogue, so the library answers its base with itself, unless another brand fills the ramp.
-    const ownBase = base.paint && (rampBrand === '' || rampBrand === base.paint.brand);
+    // A preset is in the catalogue, so the library answers its base with itself.
     rows.innerHTML = ramp(lab, settings)
-      .map((step, i) => row(step, step.isBase && ownBase ? { paint: base.paint, deltaE: 0 } : nearest(step.lab, paints), i, animate))
+      .map((step, i) => row(step, step.isBase && base.paint ? { paint: base.paint, deltaE: 0 } : nearest(step.lab), i, animate))
       .join('');
   }
 
-  // ---------- The bar: Steps, Shift and Paints, as RampToolbar ----------
+  // ---------- The shift per step, as RampToolbar's Shift group ----------
 
-  const values = {
-    steps: () => [settings.shadows, settings.highlights],
-    shift: () => [`${Math.round(settings.lStep * 100)}%`, `${Math.round(settings.cStep * 100)}`, `${settings.hueShift}°`],
-    paints: () => [rampBrand || 'All'],
+  // Each value in its own unit: lightness in percent of the scale, chroma in hundredths, hue in degrees.
+  const shown = {
+    lStep: () => `${Math.round(settings.lStep * 100)}%`,
+    cStep: () => `${Math.round(settings.cStep * 100)}`,
+    hueShift: () => `${settings.hueShift}°`,
   };
 
-  // The values shrink to fit their cell, as far as 60%, like the app's minimumScaleFactor: "The Army Painter" in a
-  // third of a phone.
-  function fit(element) {
-    element.style.fontSize = '';
-    if (element.scrollWidth > element.clientWidth) {
-      element.style.fontSize = `${Math.max(0.6, element.clientWidth / element.scrollWidth) * 1.25}rem`;
-    }
-  }
-
-  function drawSettings() {
-    colourTool.querySelectorAll('[data-bar-values]').forEach((element) => {
-      element.innerHTML = values[element.dataset.barValues]()
-        .map((value) => `<span>${escapeHTML(String(value))}</span>`)
-        .join('<span class="dot">·</span>');
-      fit(element);
-    });
-    colourTool.querySelectorAll('[data-count]').forEach((element) => {
-      element.textContent = settings[element.dataset.count];
-    });
-    colourTool.querySelectorAll('[data-step]').forEach((button) => {
-      const next = settings[button.dataset.step] + Number(button.dataset.by);
-      button.disabled = next < 0 || next > 4;
-    });
-    colourTool.querySelector('[data-shift-value="lStep"]').textContent = values.shift()[0];
-    colourTool.querySelector('[data-shift-value="cStep"]').textContent = values.shift()[1];
-    colourTool.querySelector('[data-shift-value="hueShift"]').textContent = values.shift()[2];
-  }
-
-  // One group open at a time, over the bar; its cell again, or another, closes or swaps it.
-  cells.forEach((cell) => {
-    cell.addEventListener('click', () => {
-      const open = cell.getAttribute('aria-expanded') === 'false' ? cell.dataset.rampGroup : null;
-      cells.forEach((other) => other.setAttribute('aria-expanded', String(other.dataset.rampGroup === open)));
-      panels.forEach((panel) => {
-        panel.hidden = panel.dataset.rampPanel !== open;
-      });
-    });
-  });
-
-  colourTool.querySelectorAll('[data-step]').forEach((button) => {
-    button.addEventListener('click', () => {
-      settings[button.dataset.step] += Number(button.dataset.by);
-      drawSettings();
-      draw(false);
-    });
-  });
-
   colourTool.querySelectorAll('[data-shift]').forEach((slider) => {
+    const key = slider.dataset.shift;
     slider.addEventListener('input', () => {
-      settings[slider.dataset.shift] = Number(slider.value);
-      drawSettings();
+      settings[key] = Number(slider.value);
+      colourTool.querySelector(`[data-shift-value="${key}"]`).textContent = shown[key]();
       draw(false);
     });
   });
-
-  brands.forEach((button) => {
-    button.addEventListener('click', () => {
-      rampBrand = button.dataset.rampBrand;
-      brands.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
-      drawSettings();
-      draw(true);
-    });
-  });
-
-  window.addEventListener('resize', () => colourTool.querySelectorAll('[data-bar-values]').forEach(fit));
 
   // ---------- Choosing the base ----------
 

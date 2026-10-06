@@ -391,62 +391,23 @@
             </div>
           </li>
         </ol>
-        <p class="text-xs text-muted mt-4">Shadows go cool and highlights go warm: that hue shift is what a plain lightness ramp misses.</p>
-        <p class="text-xs text-muted mt-2">Matched against 3,145 paints from nine brands in Painting Desk's catalogue. Green is close, under ΔE 2; ochre is near, under 5; red is a different colour.</p>
-        <div class="ramp-controls">
-          <div class="ramp-panel grid grid-cols-2 gap-4" data-ramp-panel="steps" hidden>
-            <div>
-              <p class="meta mb-1.5">Shadows</p>
-              <div class="stepper">
-                <button type="button" data-step="shadows" data-by="-1" aria-label="Fewer shadows"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13"/></svg></button>
-                <span data-count="shadows">2</span>
-                <button type="button" data-step="shadows" data-by="1" aria-label="More shadows"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13M8.5 2v13"/></svg></button>
-              </div>
-            </div>
-            <div>
-              <p class="meta mb-1.5">Highlights</p>
-              <div class="stepper">
-                <button type="button" data-step="highlights" data-by="-1" aria-label="Fewer highlights"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13"/></svg></button>
-                <span data-count="highlights">2</span>
-                <button type="button" data-step="highlights" data-by="1" aria-label="More highlights"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13M8.5 2v13"/></svg></button>
-              </div>
-            </div>
-          </div>
-          <div class="ramp-panel space-y-3.5" data-ramp-panel="shift" hidden>
-            <label class="block">
-              <span class="flex items-baseline justify-between mb-1"><span class="meta">Value</span><span class="font-serif text-xl leading-none" data-shift-value="lStep">8%</span></span>
-              <input type="range" min="0.03" max="0.15" step="0.01" value="0.08" data-shift="lStep" class="w-full">
-            </label>
-            <label class="block">
-              <span class="flex items-baseline justify-between mb-1"><span class="meta">Chroma</span><span class="font-serif text-xl leading-none" data-shift-value="cStep">2</span></span>
-              <input type="range" min="0" max="0.05" step="0.01" value="0.02" data-shift="cStep" class="w-full">
-            </label>
-            <label class="block">
-              <span class="flex items-baseline justify-between mb-1"><span class="meta">Hue</span><span class="font-serif text-xl leading-none" data-shift-value="hueShift">12°</span></span>
-              <input type="range" min="0" max="30" step="1" value="12" data-shift="hueShift" class="w-full">
-            </label>
-          </div>
-          <div class="ramp-panel" data-ramp-panel="paints" hidden>
-            <p class="meta mb-2.5">Fill the ramp from</p>
-            <div class="flex flex-wrap gap-1.5">
-              <button type="button" class="chip" data-ramp-brand="" aria-pressed="true">All</button>
-              <button type="button" class="chip" data-ramp-brand="AK Interactive" aria-pressed="false">AK Interactive</button>
-              <button type="button" class="chip" data-ramp-brand="Green Stuff World" aria-pressed="false">Green Stuff World</button>
-              <button type="button" class="chip" data-ramp-brand="Kimera Kolors" aria-pressed="false">Kimera Kolors</button>
-              <button type="button" class="chip" data-ramp-brand="Liquitex" aria-pressed="false">Liquitex</button>
-              <button type="button" class="chip" data-ramp-brand="P3" aria-pressed="false">P3</button>
-              <button type="button" class="chip" data-ramp-brand="Scale75" aria-pressed="false">Scale75</button>
-              <button type="button" class="chip" data-ramp-brand="Tamiya" aria-pressed="false">Tamiya</button>
-              <button type="button" class="chip" data-ramp-brand="The Army Painter" aria-pressed="false">The Army Painter</button>
-              <button type="button" class="chip" data-ramp-brand="Vallejo" aria-pressed="false">Vallejo</button>
-            </div>
-          </div>
-          <div class="ramp-bar" role="group" aria-label="Ramp settings">
-            <button type="button" class="bar-cell" data-ramp-group="steps" aria-expanded="false"><span class="bar-values" data-bar-values="steps"><span>2</span><span class="dot">·</span><span>2</span></span><span class="bar-label">Steps</span></button>
-            <button type="button" class="bar-cell" data-ramp-group="shift" aria-expanded="false"><span class="bar-values" data-bar-values="shift"><span>8%</span><span class="dot">·</span><span>2</span><span class="dot">·</span><span>12°</span></span><span class="bar-label">Shift</span></button>
-            <button type="button" class="bar-cell" data-ramp-group="paints" aria-expanded="false"><span class="bar-values" data-bar-values="paints"><span>All</span></span><span class="bar-label">Paints</span></button>
-          </div>
+        <div class="mt-6 space-y-3.5">
+          <p class="eyebrow">Shift per step</p>
+          <label class="block">
+            <span class="flex items-baseline justify-between mb-1"><span class="meta">Value</span><span class="font-serif text-xl leading-none" data-shift-value="lStep">8%</span></span>
+            <input type="range" min="0.03" max="0.15" step="0.01" value="0.08" data-shift="lStep" class="w-full">
+          </label>
+          <label class="block">
+            <span class="flex items-baseline justify-between mb-1"><span class="meta">Chroma</span><span class="font-serif text-xl leading-none" data-shift-value="cStep">2</span></span>
+            <input type="range" min="0" max="0.05" step="0.01" value="0.02" data-shift="cStep" class="w-full">
+          </label>
+          <label class="block">
+            <span class="flex items-baseline justify-between mb-1"><span class="meta">Hue</span><span class="font-serif text-xl leading-none" data-shift-value="hueShift">12°</span></span>
+            <input type="range" min="0" max="30" step="1" value="12" data-shift="hueShift" class="w-full">
+          </label>
         </div>
+        <p class="text-xs text-muted mt-5">Shadows go cool and highlights go warm: that hue shift is what a plain lightness ramp misses.</p>
+        <p class="text-xs text-muted mt-2">Matched against 3,145 paints from nine brands in Painting Desk's catalogue. Green is close, under ΔE 2; ochre is near, under 5; red is a different colour.</p>
       </div>
     </div>
   </section>

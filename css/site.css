@@ -320,30 +320,6 @@
 
 /* ---------- The colour tool ---------- */
 
-/* Chip: 11px caps in a pill, ink when selected (DESIGN.md: chips are the one place for pills). */
-.chip {
-  flex: none;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid rgb(var(--plinth));
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgb(var(--muted));
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.chip:hover {
-  border-color: rgb(var(--faint));
-}
-
-.chip[aria-pressed="true"] {
-  background: rgb(var(--ink));
-  border-color: rgb(var(--ink));
-  color: rgb(var(--paper));
-}
-
 /* Base colours as pots on a short shelf; the chosen one is lifted off it. */
 .preset {
   display: block;
@@ -452,131 +428,9 @@
   background: rgb(var(--accent-fill));
 }
 
-/* The settings bar (RampToolbar): pinned under the thumb while the card is on screen, its group's controls opening
-   over it. */
-.ramp-controls {
-  position: sticky;
-  bottom: 0.75rem;
-  z-index: 1;
-  margin-top: 1.25rem;
-}
-
-.ramp-panel {
-  margin-bottom: 0.5rem;
-  padding: 0.875rem 1rem;
-  background: rgb(var(--card));
-  border: 1px solid rgb(var(--border));
-  border-radius: 20px;
-  animation: panel-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.ramp-panel[hidden] {
-  display: none;
-}
-
-@keyframes panel-in {
-  from { opacity: 0; transform: translateY(8px); }
-}
-
-.ramp-panel input[type="range"] {
+/* The ramp's shift per step (the app's Shift group): ink sliders. */
+[data-shift] {
   accent-color: rgb(var(--ink));
-}
-
-/* The glass capsule the cells sit in. */
-.ramp-bar {
-  display: flex;
-  padding: 4px;
-  border-radius: 999px;
-  border: 1px solid rgb(var(--border) / 0.8);
-  background: rgb(var(--card) / 0.78);
-  -webkit-backdrop-filter: blur(14px) saturate(1.6);
-  backdrop-filter: blur(14px) saturate(1.6);
-  box-shadow: 0 6px 20px rgb(28 37 26 / 0.08);
-}
-
-/* BottomBarCell: the values in the serif, the name under them; ink when its group is open. */
-.bar-cell {
-  flex: 1 1 0;
-  min-width: 0;
-  height: 52px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  padding-inline: 0.5rem;
-  border-radius: 999px;
-  color: rgb(var(--ink));
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.bar-cell[aria-expanded="true"] {
-  background: rgb(var(--ink));
-  color: rgb(var(--paper));
-}
-
-.bar-values {
-  display: flex;
-  gap: 0.35em;
-  max-width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.25rem;
-  line-height: 1.1;
-}
-
-/* Run together in the serif, "2·2" reads as 2.2: a faint dot between the values. */
-.bar-values .dot {
-  opacity: 0.35;
-}
-
-.bar-label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: rgb(var(--muted));
-}
-
-.bar-cell[aria-expanded="true"] .bar-label {
-  color: rgb(var(--paper));
-}
-
-/* PaintingDeskStepper: − value + in a plinth outline, the serif numeral between two rules. */
-.stepper {
-  display: inline-flex;
-  border: 1px solid rgb(var(--plinth));
-  border-radius: 8px;
-  color: rgb(var(--ink));
-}
-
-.stepper button {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-}
-
-.stepper button:disabled {
-  opacity: 0.3;
-}
-
-.stepper svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-}
-
-.stepper span {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  border-inline: 1px solid rgb(var(--plinth));
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.5rem;
 }
 
 /* The hint on the hero photo, and the link it becomes once a colour is taken. */
@@ -692,13 +546,11 @@ a.sample-hint:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .row-in,
-  .sample-drop,
-  .ramp-panel {
+  .sample-drop {
     animation: none;
   }
 
   .preset,
-  .bar-cell,
   .stage-photo,
   .phone-screen,
   [data-bars] .bar {
