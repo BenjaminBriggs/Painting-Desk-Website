@@ -344,35 +344,6 @@
   color: rgb(var(--paper));
 }
 
-/* A row that scrolls sideways runs edge to edge of its card, but starts (and ends) in line with the card's content:
-   the negative margin takes it to the edges, the padding puts the first item back. The ::after keeps the end
-   padding, which Safari drops in a scrolling flex row. --bleed is the card's own side padding. */
-.scroll-row {
-  --bleed: 1.25rem;
-  display: flex;
-  gap: 0.375rem;
-  overflow-x: auto;
-  margin-inline: calc(var(--bleed) * -1);
-  padding-inline: var(--bleed);
-  scroll-padding-inline: var(--bleed);
-  scrollbar-width: none;
-}
-
-.scroll-row::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-row::after {
-  content: "";
-  flex: 0 0 1px;
-}
-
-@media (min-width: 640px) {
-  .scroll-row {
-    --bleed: 1.5rem;
-  }
-}
-
 /* Base colours as pots on a short shelf; the chosen one is lifted off it. */
 .preset {
   display: block;
@@ -414,8 +385,198 @@
     linear-gradient(rgb(var(--muted)), rgb(var(--muted))) center / 1.6px 0.9rem no-repeat;
 }
 
-[data-hue-shift] {
+/* ---------- The ramp, as the app's Studio draws it ---------- */
+
+/* Change on the base row: TextAction, a small accent word with a full 44px target. Holds its own colour picker, so
+   the picker opens from it. */
+.text-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 0.25rem;
+  font-size: 0.8125rem;
+  color: rgb(var(--accent));
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.text-action:focus-within {
+  outline: 2px solid rgb(var(--ink));
+  outline-offset: 2px;
+}
+
+/* A step's name over its row (SlotRows): 10px caps, lightly tracked. */
+.step-label {
+  padding-top: 0.875rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+/* The row itself (EntityRow): pot, serif name over brand · range, the badge at the end; 62 tall, a soft rule. */
+.ramp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 62px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgb(var(--soft));
+}
+
+/* ΔE as one piece (DeltaEBadge): the number in a rounded rect filled with its band's colour. Done's green for close,
+   In Progress's ochre for near, the accent fill for different; fixed fills, so the light numeral holds on all three. */
+.delta-e {
+  flex: none;
+  min-width: 52px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: #F8F4EC;
+}
+
+.delta-e.is-close {
+  background: #355C44;
+}
+
+.delta-e.is-near {
+  background: #7A4E22;
+}
+
+.delta-e.is-different {
+  background: rgb(var(--accent-fill));
+}
+
+/* The settings bar (RampToolbar): pinned under the thumb while the card is on screen, its group's controls opening
+   over it. */
+.ramp-controls {
+  position: sticky;
+  bottom: 0.75rem;
+  z-index: 1;
+  margin-top: 1.25rem;
+}
+
+.ramp-panel {
+  margin-bottom: 0.5rem;
+  padding: 0.875rem 1rem;
+  background: rgb(var(--card));
+  border: 1px solid rgb(var(--border));
+  border-radius: 20px;
+  animation: panel-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.ramp-panel[hidden] {
+  display: none;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+.ramp-panel input[type="range"] {
   accent-color: rgb(var(--ink));
+}
+
+/* The glass capsule the cells sit in. */
+.ramp-bar {
+  display: flex;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--border) / 0.8);
+  background: rgb(var(--card) / 0.78);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  backdrop-filter: blur(14px) saturate(1.6);
+  box-shadow: 0 6px 20px rgb(28 37 26 / 0.08);
+}
+
+/* BottomBarCell: the values in the serif, the name under them; ink when its group is open. */
+.bar-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding-inline: 0.5rem;
+  border-radius: 999px;
+  color: rgb(var(--ink));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bar-cell[aria-expanded="true"] {
+  background: rgb(var(--ink));
+  color: rgb(var(--paper));
+}
+
+.bar-values {
+  display: flex;
+  gap: 0.35em;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+
+/* Run together in the serif, "2·2" reads as 2.2: a faint dot between the values. */
+.bar-values .dot {
+  opacity: 0.35;
+}
+
+.bar-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgb(var(--muted));
+}
+
+.bar-cell[aria-expanded="true"] .bar-label {
+  color: rgb(var(--paper));
+}
+
+/* PaintingDeskStepper: − value + in a plinth outline, the serif numeral between two rules. */
+.stepper {
+  display: inline-flex;
+  border: 1px solid rgb(var(--plinth));
+  border-radius: 8px;
+  color: rgb(var(--ink));
+}
+
+.stepper button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.stepper button:disabled {
+  opacity: 0.3;
+}
+
+.stepper svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.stepper span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  border-inline: 1px solid rgb(var(--plinth));
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.5rem;
 }
 
 /* The hint on the hero photo, and the link it becomes once a colour is taken. */
@@ -531,11 +692,13 @@ a.sample-hint:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .row-in,
-  .sample-drop {
+  .sample-drop,
+  .ramp-panel {
     animation: none;
   }
 
   .preset,
+  .bar-cell,
   .stage-photo,
   .phone-screen,
   [data-bars] .bar {

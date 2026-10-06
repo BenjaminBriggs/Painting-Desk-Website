@@ -1,4 +1,4 @@
-// The landing page's colour tool: the app's ramp and harmonies (ColourEngine in ../Plinth), matched against the
+// The landing page's colour tool: the app's ramp (ColourEngine and Studio/RampSection in ../Plinth), matched against the
 // catalogue in /data/paints.json (built by tools/paints.py). Same maths and thresholds as the app, so what a
 // visitor sees here is what the app would answer from the same paints.
 
@@ -8,12 +8,6 @@ const CLOSE = 2; // ColourEngine.closeThreshold
 const NEAR = 5; // ColourEngine.nearThreshold
 const COOL_HUE = 264; // OKLCH blue
 const WARM_HUE = 80; // OKLCH yellow
-const HARMONIES = {
-  complementary: { rotations: [180], titles: ['Complement'] },
-  split: { rotations: [150, 210], titles: ['Split 1', 'Split 2'] },
-  triad: { rotations: [120, 240], titles: ['Triad 1', 'Triad 2'] },
-  analogous: { rotations: [-30, 30], titles: ['Analogous 1', 'Analogous 2'] },
-};
 
 // ---------- OKLab, as Lab.swift ----------
 
@@ -30,27 +24,11 @@ function hexToLab(hex) {
   };
 }
 
-function labToHex({ l, a, b }) {
-  const l3 = (l + 0.3963377774 * a + 0.2158037573 * b) ** 3;
-  const m3 = (l - 0.1055613458 * a - 0.0638541728 * b) ** 3;
-  const s3 = (l - 0.0894841775 * a - 1.291485548 * b) ** 3;
-  const rgb = [
-    4.0767416621 * l3 - 3.3077115913 * m3 + 0.2309699292 * s3,
-    -1.2684380046 * l3 + 2.6097574011 * m3 - 0.3413193965 * s3,
-    -0.0041960863 * l3 - 0.7034186147 * m3 + 1.707614701 * s3,
-  ];
-  const gamma = (c) => {
-    const v = Math.min(Math.max(c, 0), 1);
-    return v <= 0.0031308 ? 12.92 * v : 1.055 * v ** (1 / 2.4) - 0.055;
-  };
-  return rgb.map((c) => Math.round(gamma(c) * 255).toString(16).padStart(2, '0')).join('').toUpperCase();
-}
-
 const toLCH = ({ l, a, b }) => ({ l, c: Math.hypot(a, b), h: ((Math.atan2(b, a) * 180) / Math.PI + 360) % 360 });
 const fromLCH = ({ l, c, h }) => ({ l, a: c * Math.cos((h * Math.PI) / 180), b: c * Math.sin((h * Math.PI) / 180) });
 const distance = (x, y) => Math.hypot(x.l - y.l, x.a - y.a, x.b - y.b) * 100;
 
-// ---------- Ramps and harmonies, as ColourEngine.swift ----------
+// ---------- The ramp, as ColourEngine.swift ----------
 
 function towards(from, target) {
   let delta = (target - from) % 360;
@@ -59,27 +37,22 @@ function towards(from, target) {
   return delta >= 0 ? 1 : -1;
 }
 
-function ramp(base, hueShift) {
+// Darkest first, the base in the middle, lightest last. Settings as RampSettings: steps either side, and per step
+// lightness (OKLab L), chroma, and degrees of hue towards cool for shadows and warm for highlights.
+function ramp(base, settings) {
   const { l, c, h } = toLCH(base);
   const cool = towards(h, COOL_HUE);
   const warm = towards(h, WARM_HUE);
-  const shadow = (k) => fromLCH({ l: Math.max(0, l - 0.08 * k), c: Math.min(0.4, c + 0.02 * k), h: h + cool * hueShift * k });
-  const highlight = (k) => fromLCH({ l: Math.min(1, l + 0.08 * k), c: Math.max(0, c - 0.02 * k), h: h + warm * hueShift * k });
-  return [
-    { title: 'Shadow 2', lab: shadow(2) },
-    { title: 'Shadow 1', lab: shadow(1) },
-    { title: 'Base', lab: base, isBase: true },
-    { title: 'Highlight 1', lab: highlight(1) },
-    { title: 'Highlight 2', lab: highlight(2) },
-  ];
-}
-
-function harmony(kind, base) {
-  const { l, c, h } = toLCH(base);
-  const { rotations, titles } = HARMONIES[kind];
-  return [{ title: 'Base', lab: base, isBase: true }].concat(
-    rotations.map((rotation, i) => ({ title: titles[i], lab: fromLCH({ l, c, h: h + rotation }) })),
-  );
+  const { shadows, highlights, lStep, cStep, hueShift } = settings;
+  const steps = [];
+  for (let k = shadows; k >= 1; k--) {
+    steps.push({ title: `Shadow ${k}`, lab: fromLCH({ l: Math.max(0, l - lStep * k), c: Math.min(0.4, c + cStep * k), h: h + cool * hueShift * k }) });
+  }
+  steps.push({ title: 'Base', lab: base, isBase: true });
+  for (let k = 1; k <= highlights; k++) {
+    steps.push({ title: `Highlight ${k}`, lab: fromLCH({ l: Math.min(1, l + lStep * k), c: Math.max(0, c - cStep * k), h: h + warm * hueShift * k }) });
+  }
+  return steps;
 }
 
 // ---------- The catalogue ----------
@@ -97,10 +70,10 @@ async function loadCatalogue() {
   return catalogue;
 }
 
-function nearest(lab) {
+function nearest(lab, paints) {
   let best = null;
   let bestDistance = Infinity;
-  for (const paint of catalogue) {
+  for (const paint of paints) {
     const d = distance(paint.lab, lab);
     if (d < bestDistance) {
       best = paint;
@@ -121,14 +94,19 @@ function pot(paint, classes) {
   return `<svg class="pot ${classes}" viewBox="0 0 1400 1400" aria-hidden="true"><use href="${use}-paint" fill="#E0E0DC"/><use href="${use}-paint" fill="#${paint.hex}"/><use href="${use}-cap" fill="#${paint.cap}"/><use href="${use}-overlay" opacity=".25"/></svg>`;
 }
 
-function row(step, match, index) {
+// A step as SlotRows draws it: the step's name above, then the paint's row with its ΔE badge (DeltaEBadge), the
+// number in its band's colour. The band's word is there for screen readers, as the app's VoiceOver label says it.
+function row(step, match, index, animate) {
   const { paint, deltaE } = match;
-  const words = band(deltaE);
-  return `<li class="entity-row row-in" style="animation-delay:${index * 60}ms">
-    <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#${labToHex(step.lab)}"></span><span class="meta block mt-1 text-[0.5625rem] text-center">${step.title}</span></span>
-    ${pot(paint, 'w-9 h-9 flex-none')}
-    <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">${escapeHTML(paint.name)}</span><span class="meta block truncate mt-1">${escapeHTML(paint.brand)} · ${escapeHTML(paint.range)}</span></span>
-    <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> ${deltaE.toFixed(1)}</span><span class="meta block mt-1${words === 'Different' ? ' meta-accent' : ''}">${words}</span></span>
+  const word = band(deltaE);
+  const arrival = animate ? ` class="row-in" style="animation-delay:${index * 60}ms"` : '';
+  return `<li${arrival}>
+    <p class="step-label">${step.title}</p>
+    <div class="ramp-row">
+      ${pot(paint, 'w-[2.875rem] h-[2.875rem] flex-none')}
+      <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">${escapeHTML(paint.name)}</span><span class="meta block truncate">${escapeHTML(paint.brand)} · ${escapeHTML(paint.range)}</span></span>
+      <span class="delta-e is-${word.toLowerCase()}">${deltaE.toFixed(1)}<span class="sr-only"> ΔE, ${word.toLowerCase()}</span></span>
+    </div>
   </li>`;
 }
 
@@ -137,66 +115,133 @@ function row(step, match, index) {
 if (colourTool) {
   const header = colourTool.querySelector('[data-colour-base]');
   const rows = colourTool.querySelector('[data-colour-rows]');
-  const modes = colourTool.querySelectorAll('[data-mode]');
-  const hueShiftControl = colourTool.querySelector('[data-hue-shift]');
-  const hueShiftValue = colourTool.querySelector('[data-hue-shift-value]');
-  const hueShiftRow = colourTool.querySelector('[data-hue-shift-row]');
+  const cells = colourTool.querySelectorAll('[data-ramp-group]');
+  const panels = colourTool.querySelectorAll('[data-ramp-panel]');
+  const brands = colourTool.querySelectorAll('[data-ramp-brand]');
   const presets = document.querySelectorAll('[data-preset]');
-  const anyColour = document.querySelector('[data-any-colour]');
 
-  // The base is a paint from a preset, or a bare colour from the picker or the photo.
+  // The base is a paint from a preset, or a bare colour from a picker or the photo. The settings are the app's
+  // defaults; rampBrand is the brand the ramp is filled from, empty for all of them.
   let base = null;
-  let mode = 'ramp';
-  let hueShift = 12;
+  const settings = { shadows: 2, highlights: 2, lStep: 0.08, cStep: 0.02, hueShift: 12 };
+  let rampBrand = '';
 
   function drawHeader() {
     const leading = base.paint
-      ? pot(base.paint, 'w-12 h-12 flex-none')
-      : `<span class="flex-none w-12 h-12 rounded-[3px] border border-border" style="background:#${base.hex}"></span>`;
-    header.innerHTML = `${leading}<div><p class="font-serif text-[1.6rem] leading-none mb-1">${escapeHTML(base.title)}</p><p class="meta">${escapeHTML(base.meta)}</p></div>`;
+      ? pot(base.paint, 'w-[2.875rem] h-[2.875rem] flex-none')
+      : `<span class="flex-none w-[2.875rem] h-[2.875rem] rounded-[3px] border border-border" style="background:#${base.hex}"></span>`;
+    header.innerHTML = `${leading}<div class="min-w-0"><p class="font-serif text-[1.3125rem] leading-tight truncate">${escapeHTML(base.title)}</p><p class="meta truncate">${escapeHTML(base.meta)}</p></div>`;
   }
 
-  async function draw() {
+  // Rows arrive one after another for a new base; a setting moved redraws them in place, or a slider would replay
+  // the arrival on every frame.
+  async function draw(animate) {
     drawHeader();
-    hueShiftRow.hidden = mode !== 'ramp';
     await loadCatalogue();
     const lab = base.paint ? base.paint.lab : hexToLab(base.hex);
-    const steps = mode === 'ramp' ? ramp(lab, hueShift) : harmony(mode, lab);
-    rows.innerHTML = steps
-      .map((step, i) => row(step, step.isBase && base.paint ? { paint: base.paint, deltaE: 0 } : nearest(step.lab), i))
+    const paints = rampBrand ? catalogue.filter((paint) => paint.brand === rampBrand) : catalogue;
+    // A preset is in the catalogue, so the library answers its base with itself, unless another brand fills the ramp.
+    const ownBase = base.paint && (rampBrand === '' || rampBrand === base.paint.brand);
+    rows.innerHTML = ramp(lab, settings)
+      .map((step, i) => row(step, step.isBase && ownBase ? { paint: base.paint, deltaE: 0 } : nearest(step.lab, paints), i, animate))
       .join('');
   }
+
+  // ---------- The bar: Steps, Shift and Paints, as RampToolbar ----------
+
+  const values = {
+    steps: () => [settings.shadows, settings.highlights],
+    shift: () => [`${Math.round(settings.lStep * 100)}%`, `${Math.round(settings.cStep * 100)}`, `${settings.hueShift}°`],
+    paints: () => [rampBrand || 'All'],
+  };
+
+  // The values shrink to fit their cell, as far as 60%, like the app's minimumScaleFactor: "The Army Painter" in a
+  // third of a phone.
+  function fit(element) {
+    element.style.fontSize = '';
+    if (element.scrollWidth > element.clientWidth) {
+      element.style.fontSize = `${Math.max(0.6, element.clientWidth / element.scrollWidth) * 1.25}rem`;
+    }
+  }
+
+  function drawSettings() {
+    colourTool.querySelectorAll('[data-bar-values]').forEach((element) => {
+      element.innerHTML = values[element.dataset.barValues]()
+        .map((value) => `<span>${escapeHTML(String(value))}</span>`)
+        .join('<span class="dot">·</span>');
+      fit(element);
+    });
+    colourTool.querySelectorAll('[data-count]').forEach((element) => {
+      element.textContent = settings[element.dataset.count];
+    });
+    colourTool.querySelectorAll('[data-step]').forEach((button) => {
+      const next = settings[button.dataset.step] + Number(button.dataset.by);
+      button.disabled = next < 0 || next > 4;
+    });
+    colourTool.querySelector('[data-shift-value="lStep"]').textContent = values.shift()[0];
+    colourTool.querySelector('[data-shift-value="cStep"]').textContent = values.shift()[1];
+    colourTool.querySelector('[data-shift-value="hueShift"]').textContent = values.shift()[2];
+  }
+
+  // One group open at a time, over the bar; its cell again, or another, closes or swaps it.
+  cells.forEach((cell) => {
+    cell.addEventListener('click', () => {
+      const open = cell.getAttribute('aria-expanded') === 'false' ? cell.dataset.rampGroup : null;
+      cells.forEach((other) => other.setAttribute('aria-expanded', String(other.dataset.rampGroup === open)));
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.rampPanel !== open;
+      });
+    });
+  });
+
+  colourTool.querySelectorAll('[data-step]').forEach((button) => {
+    button.addEventListener('click', () => {
+      settings[button.dataset.step] += Number(button.dataset.by);
+      drawSettings();
+      draw(false);
+    });
+  });
+
+  colourTool.querySelectorAll('[data-shift]').forEach((slider) => {
+    slider.addEventListener('input', () => {
+      settings[slider.dataset.shift] = Number(slider.value);
+      drawSettings();
+      draw(false);
+    });
+  });
+
+  brands.forEach((button) => {
+    button.addEventListener('click', () => {
+      rampBrand = button.dataset.rampBrand;
+      brands.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+      drawSettings();
+      draw(true);
+    });
+  });
+
+  window.addEventListener('resize', () => colourTool.querySelectorAll('[data-bar-values]').forEach(fit));
+
+  // ---------- Choosing the base ----------
 
   function choosePreset(button) {
     presets.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
     const { name, brand, range, hex, shape, cap } = button.dataset;
     const paint = { name, brand, range, hex, shape, cap, lab: hexToLab(hex) };
     base = { paint, title: name, meta: `${brand} · ${range}` };
-    draw();
+    draw(true);
   }
 
   function chooseColour(hex, meta) {
     presets.forEach((other) => other.setAttribute('aria-pressed', 'false'));
     base = { hex, title: meta === 'Sampled from the photo' ? 'From the photo' : 'Your colour', meta: `#${hex} · ${meta}` };
-    draw();
+    draw(true);
   }
 
   presets.forEach((button) => button.addEventListener('click', () => choosePreset(button)));
 
-  anyColour?.addEventListener('input', () => chooseColour(anyColour.value.slice(1).toUpperCase(), 'Picked'));
-
-  modes.forEach((button) => {
-    button.addEventListener('click', () => {
-      mode = button.dataset.mode;
-      modes.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
-      draw();
-    });
-  });
-
-  hueShiftControl?.addEventListener('input', () => {
-    hueShift = Number(hueShiftControl.value);
-    hueShiftValue.textContent = `${hueShift}°`;
-    draw();
+  // The picker beside the shelf, and Change on the tool's base row.
+  document.querySelectorAll('[data-any-colour]').forEach((picker) => {
+    picker.addEventListener('input', () => chooseColour(picker.value.slice(1).toUpperCase(), 'Picked'));
   });
 
   // The page draws Orange Rust's ramp already; start from the same preset.

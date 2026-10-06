@@ -311,14 +311,14 @@
     </div>
   </section>
 
-  <!-- Store board 5: Colour. A working copy of the app's colour page (js/colour-tool.js); the rows drawn
+  <!-- Store board 5: Colour. A working copy of the app's ramp (js/colour-tool.js); the rows drawn
        here are what it answers for Orange Rust, so the page reads the same before the script runs. -->
   <section id="colour" class="scroll-mt-20 border-b border-rule">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
       <div class="md:sticky md:top-28">
-        <p class="eyebrow eyebrow-accent mb-4">Ramps · Harmonies · Substitutes</p>
+        <p class="eyebrow eyebrow-accent mb-4">Hue-shifted ramps</p>
         <h2 class="text-balance font-serif text-5xl md:text-6xl leading-[1] mb-5">Build the perfect recipe</h2>
-        <p class="text-lg text-muted max-w-md mb-9">Pick a base colour and get shadows that cool and highlights that warm, not just a darker and lighter version. Every step is a real paint, with how close it is.</p>
+        <p class="text-lg text-muted max-w-md mb-9">Pick a base colour and get shadows that cool and highlights that warm, not just a darker and lighter version. Every step is a real paint, with how close it is, and one tap makes the ramp a recipe.</p>
         <p class="meta mb-1">Try it: take a pot off the shelf</p>
         <ul class="preset-shelf flex items-end justify-between" aria-label="Base colours">
             <li><button type="button" class="preset" data-preset aria-pressed="true" aria-label="Orange Rust, Vallejo Model Air" title="Orange Rust · Vallejo" data-name="Orange Rust" data-brand="Vallejo" data-range="Model Air" data-hex="C76832" data-shape="generic" data-cap="FFFFFF"><svg class="pot w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#E0E0DC"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg></button></li>
@@ -337,59 +337,116 @@
           <p class="text-sm text-muted">Pick any colour, or tap the model at the top of the page: Painting Desk samples a small patch, not a single pixel, and ramps from that.</p>
         </div>
       </div>
-      <div class="card px-5 sm:px-6 pt-5 pb-3 min-w-0" data-colour-tool>
-        <div class="flex items-center gap-3 pb-4 mb-4 border-b border-ink" data-colour-base aria-live="polite">
-          <svg class="pot w-12 h-12 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#E0E0DC"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
-          <div>
-            <p class="font-serif text-[1.6rem] leading-none mb-1">Orange Rust</p>
-            <p class="meta">Vallejo · Model Air</p>
+      <div class="card px-5 sm:px-6 pt-2 pb-4 min-w-0" data-colour-tool>
+        <div class="flex items-center gap-3 py-2 border-b border-ink">
+          <div class="flex items-center gap-3 flex-1 min-w-0" data-colour-base aria-live="polite">
+            <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#E0E0DC"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
+            <div class="min-w-0">
+              <p class="font-serif text-[1.3125rem] leading-tight truncate">Orange Rust</p>
+              <p class="meta truncate">Vallejo · Model Air</p>
+            </div>
           </div>
+          <label class="text-action">Change<input type="color" value="#C76832" data-any-colour class="sr-only"></label>
         </div>
-        <div class="scroll-row mb-4 pb-1" role="group" aria-label="What to answer">
-          <button type="button" class="chip" data-mode="ramp" aria-pressed="true">Ramp</button>
-          <button type="button" class="chip" data-mode="complementary" aria-pressed="false">Complementary</button>
-          <button type="button" class="chip" data-mode="split" aria-pressed="false">Split</button>
-          <button type="button" class="chip" data-mode="triad" aria-pressed="false">Triad</button>
-          <button type="button" class="chip" data-mode="analogous" aria-pressed="false">Analogous</button>
-        </div>
-        <label class="flex items-center gap-4 mb-2" data-hue-shift-row>
-          <span class="meta flex-none">Hue shift</span>
-          <input type="range" min="0" max="30" step="1" value="12" data-hue-shift class="flex-1 min-w-0">
-          <span class="font-serif text-xl leading-none w-9 text-right" data-hue-shift-value>12°</span>
-        </label>
-        <ol class="min-h-[22rem]" data-colour-rows aria-live="polite">
-          <li class="entity-row">
-            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#A40E21"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Shadow 2</span></span>
-            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#E0E0DC"/><use href="/images/pots.svg#armypainter-paint" fill="#A8141F"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
-            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Pure Red</span><span class="meta block truncate mt-1">The Army Painter · Warpaints Air</span></span>
-            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.1</span><span class="meta block mt-1">Close</span></span>
+        <p class="eyebrow pt-4">Ramp · best in the library</p>
+        <ol data-colour-rows aria-live="polite">
+          <li>
+            <p class="step-label">Shadow 2</p>
+            <div class="ramp-row">
+              <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#E0E0DC"/><use href="/images/pots.svg#armypainter-paint" fill="#A8141F"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
+              <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">Pure Red</span><span class="meta block truncate">The Army Painter · Warpaints Air</span></span>
+              <span class="delta-e is-close">1.1<span class="sr-only"> ΔE, close</span></span>
+            </div>
           </li>
-          <li class="entity-row">
-            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#B74223"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Shadow 1</span></span>
-            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#ak-paint" fill="#E0E0DC"/><use href="/images/pots.svg#ak-paint" fill="#B83E26"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg>
-            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Carmine</span><span class="meta block truncate mt-1">AK Interactive · Standard (3rd Gen)</span></span>
-            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 0.9</span><span class="meta block mt-1">Close</span></span>
+          <li>
+            <p class="step-label">Shadow 1</p>
+            <div class="ramp-row">
+              <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#ak-paint" fill="#E0E0DC"/><use href="/images/pots.svg#ak-paint" fill="#B83E26"/><use href="/images/pots.svg#ak-cap" fill="#FFFFFF"/><use href="/images/pots.svg#ak-overlay" opacity=".25"/></svg>
+              <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">Carmine</span><span class="meta block truncate">AK Interactive · Standard (3rd Gen)</span></span>
+              <span class="delta-e is-close">0.9<span class="sr-only"> ΔE, close</span></span>
+            </div>
           </li>
-          <li class="entity-row">
-            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#C76832"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Base</span></span>
-            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#E0E0DC"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
-            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Orange Rust</span><span class="meta block truncate mt-1">Vallejo · Model Air</span></span>
-            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 0.0</span><span class="meta block mt-1">Close</span></span>
+          <li>
+            <p class="step-label">Base</p>
+            <div class="ramp-row">
+              <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#generic-paint" fill="#E0E0DC"/><use href="/images/pots.svg#generic-paint" fill="#C76832"/><use href="/images/pots.svg#generic-cap" fill="#FFFFFF"/><use href="/images/pots.svg#generic-overlay" opacity=".25"/></svg>
+              <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">Orange Rust</span><span class="meta block truncate">Vallejo · Model Air</span></span>
+              <span class="delta-e is-close">0.0<span class="sr-only"> ΔE, close</span></span>
+            </div>
           </li>
-          <li class="entity-row">
-            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#D48B4D"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Highlight 1</span></span>
-            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#E0E0DC"/><use href="/images/pots.svg#armypainter-paint" fill="#D28D57"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
-            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Barbarian Flesh</span><span class="meta block truncate mt-1">The Army Painter · Warpaints Air</span></span>
-            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.0</span><span class="meta block mt-1">Close</span></span>
+          <li>
+            <p class="step-label">Highlight 1</p>
+            <div class="ramp-row">
+              <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#armypainter-paint" fill="#E0E0DC"/><use href="/images/pots.svg#armypainter-paint" fill="#D28D57"/><use href="/images/pots.svg#armypainter-cap" fill="#FFFFFF"/><use href="/images/pots.svg#armypainter-overlay" opacity=".25"/></svg>
+              <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">Barbarian Flesh</span><span class="meta block truncate">The Army Painter · Warpaints Air</span></span>
+              <span class="delta-e is-close">1.0<span class="sr-only"> ΔE, close</span></span>
+            </div>
           </li>
-          <li class="entity-row">
-            <span class="flex-none w-[4.25rem]"><span class="block h-9 rounded-[3px]" style="background:#DEAD6F"></span><span class="meta block mt-1 text-[0.5625rem] text-center">Highlight 2</span></span>
-            <svg class="pot w-9 h-9 flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#E0E0DC"/><use href="/images/pots.svg#s75-paint" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg>
-            <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3rem] leading-none truncate">Desert Yellow</span><span class="meta block truncate mt-1">Scale75 · Warfront</span></span>
-            <span class="flex-none text-right"><span class="block font-serif text-xl leading-none"><span class="text-xs text-muted">ΔE</span> 1.0</span><span class="meta block mt-1">Close</span></span>
+          <li>
+            <p class="step-label">Highlight 2</p>
+            <div class="ramp-row">
+              <svg class="pot w-[2.875rem] h-[2.875rem] flex-none" viewBox="0 0 1400 1400" aria-hidden="true"><use href="/images/pots.svg#s75-paint" fill="#E0E0DC"/><use href="/images/pots.svg#s75-paint" fill="#D9AF75"/><use href="/images/pots.svg#s75-cap" fill="#2C2A29"/><use href="/images/pots.svg#s75-overlay" opacity=".25"/></svg>
+              <span class="flex-1 min-w-0"><span class="block font-serif text-[1.3125rem] leading-tight truncate">Desert Yellow</span><span class="meta block truncate">Scale75 · Warfront</span></span>
+              <span class="delta-e is-close">1.0<span class="sr-only"> ΔE, close</span></span>
+            </div>
           </li>
         </ol>
-        <p class="text-xs text-muted border-t border-soft pt-3 mt-1">Matched against 3,145 paints from nine brands in Painting Desk's catalogue. ΔE under 2 reads close, under 5 near.</p>
+        <p class="text-xs text-muted mt-4">Shadows go cool and highlights go warm: that hue shift is what a plain lightness ramp misses.</p>
+        <p class="text-xs text-muted mt-2">Matched against 3,145 paints from nine brands in Painting Desk's catalogue. Green is close, under ΔE 2; ochre is near, under 5; red is a different colour.</p>
+        <div class="ramp-controls">
+          <div class="ramp-panel grid grid-cols-2 gap-4" data-ramp-panel="steps" hidden>
+            <div>
+              <p class="meta mb-1.5">Shadows</p>
+              <div class="stepper">
+                <button type="button" data-step="shadows" data-by="-1" aria-label="Fewer shadows"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13"/></svg></button>
+                <span data-count="shadows">2</span>
+                <button type="button" data-step="shadows" data-by="1" aria-label="More shadows"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13M8.5 2v13"/></svg></button>
+              </div>
+            </div>
+            <div>
+              <p class="meta mb-1.5">Highlights</p>
+              <div class="stepper">
+                <button type="button" data-step="highlights" data-by="-1" aria-label="Fewer highlights"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13"/></svg></button>
+                <span data-count="highlights">2</span>
+                <button type="button" data-step="highlights" data-by="1" aria-label="More highlights"><svg viewBox="0 0 17 17" aria-hidden="true"><path d="M2 8.5h13M8.5 2v13"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="ramp-panel space-y-3.5" data-ramp-panel="shift" hidden>
+            <label class="block">
+              <span class="flex items-baseline justify-between mb-1"><span class="meta">Value</span><span class="font-serif text-xl leading-none" data-shift-value="lStep">8%</span></span>
+              <input type="range" min="0.03" max="0.15" step="0.01" value="0.08" data-shift="lStep" class="w-full">
+            </label>
+            <label class="block">
+              <span class="flex items-baseline justify-between mb-1"><span class="meta">Chroma</span><span class="font-serif text-xl leading-none" data-shift-value="cStep">2</span></span>
+              <input type="range" min="0" max="0.05" step="0.01" value="0.02" data-shift="cStep" class="w-full">
+            </label>
+            <label class="block">
+              <span class="flex items-baseline justify-between mb-1"><span class="meta">Hue</span><span class="font-serif text-xl leading-none" data-shift-value="hueShift">12°</span></span>
+              <input type="range" min="0" max="30" step="1" value="12" data-shift="hueShift" class="w-full">
+            </label>
+          </div>
+          <div class="ramp-panel" data-ramp-panel="paints" hidden>
+            <p class="meta mb-2.5">Fill the ramp from</p>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" class="chip" data-ramp-brand="" aria-pressed="true">All</button>
+              <button type="button" class="chip" data-ramp-brand="AK Interactive" aria-pressed="false">AK Interactive</button>
+              <button type="button" class="chip" data-ramp-brand="Green Stuff World" aria-pressed="false">Green Stuff World</button>
+              <button type="button" class="chip" data-ramp-brand="Kimera Kolors" aria-pressed="false">Kimera Kolors</button>
+              <button type="button" class="chip" data-ramp-brand="Liquitex" aria-pressed="false">Liquitex</button>
+              <button type="button" class="chip" data-ramp-brand="P3" aria-pressed="false">P3</button>
+              <button type="button" class="chip" data-ramp-brand="Scale75" aria-pressed="false">Scale75</button>
+              <button type="button" class="chip" data-ramp-brand="Tamiya" aria-pressed="false">Tamiya</button>
+              <button type="button" class="chip" data-ramp-brand="The Army Painter" aria-pressed="false">The Army Painter</button>
+              <button type="button" class="chip" data-ramp-brand="Vallejo" aria-pressed="false">Vallejo</button>
+            </div>
+          </div>
+          <div class="ramp-bar" role="group" aria-label="Ramp settings">
+            <button type="button" class="bar-cell" data-ramp-group="steps" aria-expanded="false"><span class="bar-values" data-bar-values="steps"><span>2</span><span class="dot">·</span><span>2</span></span><span class="bar-label">Steps</span></button>
+            <button type="button" class="bar-cell" data-ramp-group="shift" aria-expanded="false"><span class="bar-values" data-bar-values="shift"><span>8%</span><span class="dot">·</span><span>2</span><span class="dot">·</span><span>12°</span></span><span class="bar-label">Shift</span></button>
+            <button type="button" class="bar-cell" data-ramp-group="paints" aria-expanded="false"><span class="bar-values" data-bar-values="paints"><span>All</span></span><span class="bar-label">Paints</span></button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
