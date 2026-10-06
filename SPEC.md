@@ -112,9 +112,10 @@ highlights. Tokens come from `../Plinth/docs/DESIGN.md`; this table is the subse
 ### 5.1 Drawn screens
 
 The landing page shows each store board as a screen drawn in HTML from the app's own components,
-not a screenshot: the shelf, the desk and the Showcase as one flow (the backlog on plain paper, the
-desk on the pegboard, the moves between them in the app's words), the stage selector and photo prompt, the paint
-rack (pots on rails, `images/pots.svg`), the colour ramp, a recipe, the painting clock, stats. They
+not a screenshot: the stage selector and photo prompt, the paint rack (pots on rails,
+`images/pots.svg`), the colour ramp, a recipe, the painting clock, stats. The one exception is the
+shelf, the desk and the Showcase, shown as one flow in three phones the same size, the app's own
+Shelf, Desk and Showcase screens (§5.2) with the moves between them in the app's words. They
 stay light on paper, carry no third-party marks, and cost a few KB.
 
 - **Pots** come from the app's artwork (`../Plinth/PaintingDesk/Assets.xcassets/PaintPots`: the

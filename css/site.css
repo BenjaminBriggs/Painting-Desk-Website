@@ -661,6 +661,19 @@ a.sample-hint:hover {
   border-radius: 0 2px 2px 0;
 }
 
+/* The Shelf and the Desk: the three places, each the app's own screen in a phone the same size. */
+.place-phone {
+  width: 100%;
+  max-width: 15rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 1024px) {
+  .place-phone {
+    max-width: 16.5rem;
+  }
+}
+
 /* ---------- The hero: the app, with pieces of it set around the phone ---------- */
 
 /* Sized in em throughout, so one font size per breakpoint scales the whole arrangement. Below 640px only the

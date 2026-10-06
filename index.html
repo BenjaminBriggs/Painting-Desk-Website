@@ -142,96 +142,68 @@
         <p class="text-lg text-muted max-w-md">Every model you own goes on the shelf: the backlog, the pile of shame, all of it, sorted by stage. The desk holds the few you're painting now. Finish one and it goes on the Showcase.</p>
       </div>
 
-      <!-- Three equal panels: the three places matter as much as each other. -->
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 lg:gap-4 items-stretch">
-        <!-- The shelf: plain paper, because it is off the desk (DESIGN.md: no pegboard behind it). -->
-        <div class="card p-4 sm:p-5 min-w-0 flex flex-col">
-          <div class="flex items-baseline justify-between mb-1">
-            <p class="font-serif text-[1.75rem] leading-none">The Shelf</p>
-            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">46</span> kits</p>
+      <!-- Three phones the same size: the three places matter as much as each other. The app's own screens, from its
+           demo store (SPEC.md §5.2), the same captures the hero's phone shows in turn. -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 lg:gap-4 items-start">
+        <figure class="m-0 min-w-0">
+          <figcaption class="mb-5 text-center">
+            <p class="font-serif text-[1.75rem] leading-none mb-1.5">The Shelf</p>
+            <p class="text-sm text-muted">Everything not on the desk.</p>
+          </figcaption>
+          <div class="device place-phone">
+            <span class="device-button is-left" style="top:16%;height:4%"></span>
+            <span class="device-button is-left" style="top:23%;height:7%"></span>
+            <span class="device-button is-left" style="top:32%;height:7%"></span>
+            <span class="device-button is-right" style="top:25%;height:11%"></span>
+            <div class="device-screen">
+              <img src="/images/screens/shelf.webp" width="600" height="1304" loading="lazy" alt="The Shelf in Painting Desk: every kit not on the desk, grouped by stage, with how long each has waited.">
+            </div>
           </div>
-          <p class="text-sm text-muted mb-1">Everything not on the desk.</p>
-            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>Sprue</span><span class="font-serif text-base normal-case tracking-normal text-ink">30</span></p>
-            <ul>
-              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
-                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Cavalry regiment <span class="text-muted">×10</span></span><span class="meta block mt-1 truncate">Fantasy · Wargame</span></span>
-              </li>
-              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
-                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Ruined chapel</span><span class="meta block mt-1 truncate">Terrain</span></span>
-              </li>
-              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
-                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Ranger captain</span><span class="meta block mt-1 truncate">Fantasy · Skirmish</span></span>
-              </li>
-            </ul>
-            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>Built</span><span class="font-serif text-base normal-case tracking-normal text-ink">9</span></p>
-            <ul>
-              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
-                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Wolf riders <span class="text-muted">×5</span></span><span class="meta block mt-1 truncate">Fantasy · Wargame</span></span>
-              </li>
-            </ul>
-            <p class="flex items-baseline justify-between meta pt-3 pb-1 border-b border-ink"><span>In Progress</span><span class="font-serif text-base normal-case tracking-normal text-ink">2</span></p>
-            <ul>
-              <li class="flex items-baseline justify-between gap-3 py-2.5 border-b border-soft last:border-b-0">
-                <span class="min-w-0"><span class="block font-serif text-[1.2rem] leading-none truncate">Knight on foot</span><span class="meta block mt-1 truncate">Historical · 54mm</span></span><span class="meta flex-none">Paused</span>
-              </li>
-            </ul>
-          <p class="meta text-faint pt-3 mt-auto">+ 41 more</p>
+        </figure>
+        <div class="flex lg:flex-col items-center justify-center gap-2 py-3 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
+          <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+          <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Put on the desk</span>
         </div>
-      <div class="flex lg:flex-col items-center justify-center gap-2 py-1 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
-        <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
-        <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-        <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Put on the desk</span>
-      </div>
-        <!-- The desk: on the pegboard, like the app's. -->
-        <div class="pegboard rounded-[6px] p-4 sm:p-5 min-w-0 flex flex-col">
-          <div class="flex items-baseline justify-between mb-1 px-1">
-            <p class="font-serif text-[1.75rem] leading-none">The Desk</p>
-            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">4</span> kits</p>
+        <figure class="m-0 min-w-0">
+          <figcaption class="mb-5 text-center">
+            <p class="font-serif text-[1.75rem] leading-none mb-1.5">The Desk</p>
+            <p class="text-sm text-muted">What you're painting now.</p>
+          </figcaption>
+          <div class="device place-phone">
+            <span class="device-button is-left" style="top:16%;height:4%"></span>
+            <span class="device-button is-left" style="top:23%;height:7%"></span>
+            <span class="device-button is-left" style="top:32%;height:7%"></span>
+            <span class="device-button is-right" style="top:25%;height:11%"></span>
+            <div class="device-screen">
+              <img src="/images/screens/desk.webp" width="600" height="1304" loading="lazy" alt="The Desk in Painting Desk: the kits being painted now, each with its photo and days on the desk.">
+            </div>
           </div>
-          <p class="text-sm text-muted mb-4 px-1">What you're painting now.</p>
-          <ul class="space-y-2.5">
-            <li class="card p-3.5 flex items-start justify-between gap-3">
-              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Cavalry lancer</p><p class="meta truncate">In Progress</p></div>
-              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">12</span><span class="meta block mt-0.5">days</span></p>
-            </li>
-            <li class="card p-3.5 flex items-start justify-between gap-3">
-              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Dwarf rangers <span class="text-muted">×5</span></p><p class="meta truncate">Primed</p></div>
-              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">4</span><span class="meta block mt-0.5">days</span></p>
-            </li>
-            <li class="card p-3.5 flex items-start justify-between gap-3">
-              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Plague doctor bust</p><p class="meta truncate">Built</p></div>
-              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">32</span><span class="meta block mt-0.5">days</span></p>
-            </li>
-            <li class="card p-3.5 flex items-start justify-between gap-3">
-              <div class="min-w-0"><p class="font-serif text-[1.35rem] leading-[1.05] mb-1 truncate">Watchtower</p><p class="meta truncate">Sprue</p></div>
-              <p class="text-right flex-none"><span class="font-serif text-2xl leading-none text-accent">1</span><span class="meta block mt-0.5">day</span></p>
-            </li>
-          </ul>
-          <p class="flex items-center gap-2 meta pt-4 mt-auto px-1">
+          <p class="flex items-center justify-center gap-2 meta pt-5">
             <svg class="w-4 h-4 flex-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m11 6-6 6 6 6"/></svg>
             Back to the shelf keeps its stage
           </p>
+        </figure>
+        <div class="flex lg:flex-col items-center justify-center gap-2 py-3 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
+          <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
+          <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Done</span>
         </div>
-      <div class="flex lg:flex-col items-center justify-center gap-2 py-1 lg:py-0 lg:px-1 lg:self-center text-muted" aria-hidden="true">
-        <svg class="w-5 h-5 lg:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m6 13 6 6 6-6"/></svg>
-        <svg class="w-5 h-5 hidden lg:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-        <span class="meta lg:[writing-mode:vertical-rl] lg:rotate-180">Done</span>
-      </div>
-        <!-- The Showcase: a finished kit's Done photo, square, as the app crops it. -->
-        <div class="card p-4 sm:p-5 min-w-0 flex flex-col">
-          <div class="flex items-baseline justify-between mb-1">
-            <p class="font-serif text-[1.75rem] leading-none">The Showcase</p>
-            <p class="meta"><span class="font-serif text-lg normal-case tracking-normal text-ink">44</span> this year</p>
+        <figure class="m-0 min-w-0">
+          <figcaption class="mb-5 text-center">
+            <p class="font-serif text-[1.75rem] leading-none mb-1.5">The Showcase</p>
+            <p class="text-sm text-muted">Finished, photographed, on a plinth.</p>
+          </figcaption>
+          <div class="device place-phone">
+            <span class="device-button is-left" style="top:16%;height:4%"></span>
+            <span class="device-button is-left" style="top:23%;height:7%"></span>
+            <span class="device-button is-left" style="top:32%;height:7%"></span>
+            <span class="device-button is-right" style="top:25%;height:11%"></span>
+            <div class="device-screen">
+              <img src="/images/screens/showcase.webp" width="600" height="1304" loading="lazy" alt="The Showcase in Painting Desk: finished kits, newest first, with their best photos.">
+            </div>
           </div>
-          <p class="text-sm text-muted mb-4">Finished, photographed, on a plinth.</p>
-          <div class="on-plinth aspect-square lg:aspect-auto lg:flex-1 lg:min-h-[16rem]">
-            <img src="/images/stages/done.webp" width="720" height="720" loading="lazy" alt="The finished miniature from the top of the page, on its round base" class="w-full h-full object-cover object-[50%_45%] lg:absolute lg:inset-0">
-          </div>
-          <p class="flex items-baseline justify-between gap-3 pt-3">
-            <span class="font-serif text-[1.2rem] leading-none">Veteran with sword</span>
-            <span class="meta">Done</span>
-          </p>
-        </div>
+        </figure>
       </div>
 
       <dl class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6 mt-12 md:mt-14 pt-8 border-t border-rule">
