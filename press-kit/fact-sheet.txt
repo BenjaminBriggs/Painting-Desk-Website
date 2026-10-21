@@ -7,8 +7,7 @@ FACT SHEET
 Developer:     Benjamin Briggs
 Platforms:     iPhone, iPad, Mac and Apple Vision Pro
 Requires:      iOS 27, iPadOS 27, macOS 27 or visionOS 27
-Availability:  Public beta on TestFlight: https://testflight.apple.com/join/u1uGEpJv
-               App Store launch to come.
+Availability:  On the App Store: https://apps.apple.com/app/painting-desk-mini-tracker/id6818069473
 Languages:     English
 Website:       https://paintingdesk.app
 Press:         press@paintingdesk.app
@@ -61,7 +60,7 @@ TEN MINUTES WITH PAINTING DESK
 4. Build a ramp. Open any paint and choose Open in Studio. Switch between Ramp, the harmonies and Substitutes, and drag Hue shift to zero to see what it does.
 5. Paint, then finish. On a kit, tap the timer to start painting; the clock runs as a Live Activity. When the kit is done, Finish model on the clock moves it to Done, and it lands on the Showcase.
 
-There's nothing to unlock: every feature is in the public beta. Join on TestFlight at https://testflight.apple.com/join/u1uGEpJv
+There's nothing to unlock: every feature is there from the first launch. Painting Desk is on the App Store at https://apps.apple.com/app/painting-desk-mini-tracker/id6818069473
 
 
 ABOUT THE DEVELOPER

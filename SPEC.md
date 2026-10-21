@@ -36,7 +36,7 @@ the site should speak it without explaining it.
 | `/support` | App Review support URL | Contact email, FAQ, how to report a bug |
 | `/privacy` | App Review privacy URL | What is stored (on device and in the user's iCloud), what is not (no server, no account, no analytics), contact |
 | `/terms` | Only if the app is paid or has purchases (§11) | Licence (Apple standard EULA), purchase/subscription terms, refunds via Apple |
-| `/press` | Press kit, after Magic Sudoku's (2026-10-04) | Fact sheet, key features, three descriptions with copy buttons, a ten-minute reviewer's guide, the beta, icon (light and dark), a photograph, iPhone and iPad screenshots, the zip, about the developer, `press@` |
+| `/press` | Press kit, after Magic Sudoku's (2026-10-04) | Fact sheet, key features, three descriptions with copy buttons, a ten-minute reviewer's guide, the App Store link, icon (light and dark), a photograph, iPhone and iPad screenshots, the zip, about the developer, `press@` |
 | `/404` | Unknown paths | Way back home; `noindex` |
 
 The press kit's files live in `press-kit/`: full-size assets, `thumbs/` for the page, `fact-sheet.txt`
@@ -220,8 +220,9 @@ the repo entirely.
 https://testflight.apple.com/join/u1uGEpJv, since 2026-10-04) and relabels it "Join the TestFlight
 beta" (the header's says "Join the beta"), and swaps any element's text that carries
 `data-beta="…"`. The privacy policy's "The beta" section says what TestFlight shares with us; take it
-out after launch if the beta closes. Launch day: set it to `true` and push. The App Store URL is a
-placeholder until the app has an ID (§11).
+out after launch if the beta closes. Launched 2026-10-21: `APP_RELEASED = true`, and every App
+Store link is https://apps.apple.com/app/painting-desk-mini-tracker/id6818069473 (no storefront in
+the path, so each visitor gets their own country's store), with the Smart App Banner on `/`.
 
 ### 6.5 Images
 
@@ -325,8 +326,8 @@ Ordered by what they block.
    paintingdesk.com is parked for sale on Sedo; not needed for launch.
 2. **Free vs paid** (app SPEC §12.2). Decides whether `/terms` exists and what it says, and the
    "price" line on the landing page.
-3. **App Store ID.** Needed for the App Store links, the Smart App Banner
-   (`<meta name="apple-itunes-app" content="app-id=…">`) and launch.
+3. ~~**App Store ID.**~~ **Resolved 2026-10-21: 6818069473**, in the App Store links and the Smart
+   App Banner (`<meta name="apple-itunes-app" content="app-id=6818069473">`).
 4. **Universal links.** Only if the app will share links (it shares images today). If yes: add
    `applinks:paintingdesk.app` to the app's associated domains and serve
    `/.well-known/apple-app-site-association` here as `application/json` (the header rule is already
@@ -350,4 +351,4 @@ Ordered by what they block.
 - [x] Every `example.com` placeholder replaced (canonicals, og:url, sitemap, robots, email)
 - [ ] §9 verification passes
 - [ ] Support and privacy URLs entered in App Store Connect
-- [ ] Launch day: `APP_RELEASED = true`, App Store ID in place, push
+- [x] Launch day: `APP_RELEASED = true`, App Store ID in place, push

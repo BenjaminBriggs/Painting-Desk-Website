@@ -13,8 +13,8 @@ A lowercase "plinth" is still the physical display base, the `plinth` colour tok
 - Static HTML, no build step. Tailwind via CDN with the theme in `js/tailwind-theme.js`
   (tokens from `../Plinth/docs/DESIGN.md`); component classes in `css/site.css`.
 - Header and footer are client-side includes (`include-html="/includes/…"`, `js/includes.js`).
-- `js/app-store.js` is the release switch: `APP_RELEASED = false` points App Store links at the
-  TestFlight public beta ("Join the TestFlight beta").
+- `js/app-store.js` is the release switch: `APP_RELEASED = true` since launch (2026-10-21, App Store
+  ID 6818069473); `false` would point App Store links back at the TestFlight public beta.
 - Netlify publishes the repo root; all config in `netlify.toml`.
 
 ## Development
