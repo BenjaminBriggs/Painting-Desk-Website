@@ -596,9 +596,11 @@ a.sample-hint:hover {
 
 /* ---------- The app on iPhone: a drawn frame ---------- */
 
+/* The bezel is the screen's margin, not the frame's padding: a percentage resolves against the parent's width, and
+   only the screen's parent is always the phone. flow-root keeps the top margin inside the frame. */
 .device {
+  display: flow-root;
   position: relative;
-  padding: 3.5%;
   border-radius: 15% / 7%;
   background: #18191A;
   box-shadow:
@@ -608,6 +610,7 @@ a.sample-hint:hover {
 
 .device-screen {
   position: relative;
+  margin: 3.5%;
   overflow: hidden;
   border-radius: 12% / 5.6%;
 }
